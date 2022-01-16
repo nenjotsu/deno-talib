@@ -1,0 +1,15 @@
+scripts:
+  start:
+    file: index.ts
+    deno_options:
+      allow-net: localhost
+  develop:
+    file: index.ts
+    deno_options:
+      reload: true
+      allow-read:
+        - ./
+      allow-net:
+        - localhost
+        - api.binance.com
+        - stream.binance.com:9443
