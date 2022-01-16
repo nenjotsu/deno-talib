@@ -1,4 +1,6 @@
-Technical indicators (TALib) written in typescript for deno.
+# Deno TALib (Technical Analysis)
+
+Technical analysis (TALib) written in typescript for deno.
 
 ![alt text](deno-talib-logo.jpg "deno-talib logo")
 
@@ -7,15 +9,18 @@ Technical indicators (TALib) written in typescript for deno.
 ## Deno
 
 ``` bash
-deno install https://deno.land/x/talib
+deno install https://deno.land/x/talib/index.ts
+
+# or force to upgrade
+deno install -f https://deno.land/x/talib/index.ts
 ```
 
 ``` javascript
-import { SMA } from 'https://deno.land/x/talib';
+import { RSI } from 'https://deno.land/x/talib/index.ts';
 
 # or specific version 
 
-import { SMA } from 'https://deno.land/x/talib@0.0.3';
+import { RSI } from 'https://deno.land/x/talib@0.0.5/index.ts';
 ```
 
 ### Pattern detection
@@ -23,26 +28,40 @@ import { SMA } from 'https://deno.land/x/talib@0.0.3';
 All indicators will be available in window object. So you can just use
 
 ``` javascript
-sma({ period: 5, values: [1,2,3,4,5,6,7,8,9], reversedInput: true});
+// sma({ period: 5, values: [1,2,3,4,5,6,7,8,9], reversedInput: true});
+
+import { RSI } from 'https://deno.land/x/talib/index.ts'
+
+const inputRSI = {
+  values : [127.75,129.02,132.75,145.40,148.98,137.52,147.38,139.05,137.23,149.30,162.45,178.95,200.35,221.90,243.23,243.52,286.42,280.27,277.35,269.02,263.23,214.90],
+  period : 14
+};
+const expectedResult = [
+    86.41,86.43,89.65,86.50,84.96,80.54,77.56,58.06
+];
+
+console.log(RSI.calculate(inputRSI))
 ```
 
 or
 
 ``` javascript
+import { SMA } from 'https://deno.land/x/talib@0.0.5/index.ts';
 SMA.calculate({ period: 5, values: [1,2,3,4,5,6,7,8,9] });
 ```
 
 # Available Indicators
+## NOTE: Only those with checked marks are currently added. You can submit issues for a feature request, or submit a PR.
 
 1. [ ] [Accumulation Distribution Line (ADL)](https://tonicdev.com/anandaravindan/adl "ADL").
 1. [ ] [Average Directional Index (ADX)](https://github.com/anandanand84/technicalindicators/blob/master/test/directionalmovement/ADX.js "ADX").
 1. [ ] [Average True Range (ATR)](https://tonicdev.com/anandaravindan/atr "ATR").
 1. [ ] [Awesome Oscillator (AO)](https://github.com/anandanand84/technicalindicators/blob/master/test/oscillators/AwesomeOscillator.js "AO").
-1. [x] [Bollinger Bands (BB)](https://tonicdev.com/anandaravindan/bb "BB").
+1. [x] [Bollinger Bands (BB)](https://replit.com/@nenjotsu/talib-BB#mod.ts "BB").
 1. [ ] [Commodity Channel Index (CCI)](https://github.com/anandanand84/technicalindicators/blob/master/test/oscillators/CCI.js "CCI").
 1. [ ] [Force Index (FI)](https://github.com/anandanand84/technicalindicators/blob/master/test/volume/ForceIndex.js "FI").
 1. [ ] [Know Sure Thing (KST)](https://tonicdev.com/anandaravindan/kst "KST").
-1. [x] [Moneyflow Index (MFI)](https://github.com/anandanand84/technicalindicators/blob/master/test/volume/MFI.js "MFI").
+1. [x] [Moneyflow Index (MFI)](https://replit.com/@nenjotsu/talib-MFI#mod.ts "MFI").
 1. [ ] [Moving Average Convergence Divergence (MACD)](https://tonicdev.com/anandaravindan/macd "MACD").
 1. [ ] [On Balance Volume (OBV)](https://tonicdev.com/anandaravindan/obv "OBV").
 1. [ ] [Parabolic Stop and Reverse (PSAR)](https://github.com/anandanand84/technicalindicators/blob/master/test/momentum/PSAR.js "PSAR").
@@ -124,7 +143,7 @@ Search for all bullish or bearish using
 
 
 ``` javascript
-import { bullish } from 'https://deno.land/x/talib';
+import { bullish } from 'https://deno.land/x/talib/index.ts';
 
 const twoDayBullishInput = {
   open: [23.25,15.36],
@@ -146,7 +165,7 @@ There are three ways you can use to get the indicator results.
 Every indicator has a static method `calculate` which can be used to calculate the indicator without creating an object.
 
 ``` javascript
-import { SMA } from 'https://deno.land/x/talib';
+import { SMA } from 'https://deno.land/x/talib/index.ts';
 var prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
 var period = 10;
 sma({period : period, values : prices})
@@ -155,7 +174,7 @@ sma({period : period, values : prices})
 or
 
 ``` javascript
-import { SMA } from 'https://deno.land/x/talib';
+import { SMA } from 'https://deno.land/x/talib/index.ts';
 var prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
 var period = 10;
 SMA.calculate({period : period, values : prices})
@@ -198,7 +217,7 @@ This a merge of calculate and nextValue. The usual use case would be
 This uses regular javascript numbers, so there can be rounding errors which are negligible for a technical indicators, you can set precision by using the below config. By default there is no precision set.
 
   ``` javascript
-  import talib from 'https://deno.land/x/talib';
+  import talib from 'https://deno.land/x/talib/index.ts';
   talib.setConfig('precision', 10);
   ```
 
