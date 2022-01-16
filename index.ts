@@ -1,4 +1,4 @@
-export * from './lib/index.ts';
+export * from './src/index.ts';
 export const getAvailableIndicators = () => {
   const AvailableIndicators: string[] = []
   // AvailableIndicators.push('sma');
@@ -7,7 +7,7 @@ export const getAvailableIndicators = () => {
   // AvailableIndicators.push('wema');
   // AvailableIndicators.push('macd');
   AvailableIndicators.push('rsi');
-  // AvailableIndicators.push('bollingerbands');
+  AvailableIndicators.push('bollingerbands');
   // AvailableIndicators.push('adx');
   // AvailableIndicators.push('atr');
   // AvailableIndicators.push('truerange');
@@ -29,7 +29,7 @@ export const getAvailableIndicators = () => {
   // AvailableIndicators.push('heikinashi');
 
   // AvailableIndicators.push('stochasticrsi');
-  // AvailableIndicators.push('mfi');
+  AvailableIndicators.push('mfi');
 
   // AvailableIndicators.push('averagegain');
   // AvailableIndicators.push('averageloss');
