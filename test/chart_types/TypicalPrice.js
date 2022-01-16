@@ -1,13 +1,13 @@
-var TypicalPrice = require('../../lib/chart_types/TypicalPrice').TypicalPrice;
-var assert = require('assert');
+let TypicalPrice = require('../../lib/chart_types/TypicalPrice').TypicalPrice;
+let assert = require('assert');
 
-var data = {
+let data = {
     high : [1, 4, 1, 2, 1],
     low :  [2, 5, 2, 2, 1],
     close: [3, 6, 4, 2, 1]
 }
 
-var expectedOutput = [(1 + 2 + 3)/ 3, (4 + 5 +6)/ 3, (1 + 2 + 4)/ 3, 2, 1];
+let expectedOutput = [(1 + 2 + 3)/ 3, (4 + 5 +6)/ 3, (1 + 2 + 4)/ 3, 2, 1];
 
 describe('TypicalPrice ', function() {
     let input = {};
@@ -20,8 +20,8 @@ describe('TypicalPrice ', function() {
   
     it('should be able to get TypicalPrice for the next bar using nextValue', function() {
       input.values = [];
-      var typicalPrice = new TypicalPrice(input);
-      var result = typicalPrice.nextValue({
+      let typicalPrice = new TypicalPrice(input);
+      let result = typicalPrice.nextValue({
           high: 4,
           low : 4,
           close : 4 

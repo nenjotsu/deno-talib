@@ -1,9 +1,9 @@
 "use strict"
-var CCI = require('../../lib/oscillators/CCI').CCI;
-var assert = require("assert");
-var data = require('../data');
+let CCI = require('../../lib/oscillators/CCI').CCI;
+let assert = require("assert");
+let data = require('../data');
 
-var inputCCI = {
+let inputCCI = {
   open : [
     23.94,23.85,23.94,23.73,23.60,23.46,23.53,23.73,24.09,23.95,23.92,24.04,23.83,24.05,24.89,24.95,24.91,25.24,25.13,25.26,24.74,24.36,24.49,24.70,24.65,24.48,24.46,24.62,23.81,23.91
   ],
@@ -18,7 +18,7 @@ var inputCCI = {
   ],
   period : 20
 };
-var expectedResult = [
+let expectedResult = [
     102.19852632840085,
       30.770139381053642,
       6.498977012877848,
@@ -41,12 +41,12 @@ describe('CCI (Commodity Channel Index', function () {
   });
 
   it('should be able to get CCI for the next bar', function () {
-    var cci = new CCI(inputCCI);
+    let cci = new CCI(inputCCI);
     assert.deepEqual(cci.getResult(), expectedResult, 'Wrong Results while getting results');
   })
 
   it('should be able to get CCI for the next bar using nextValue', function () {
-    var cci = new CCI({
+    let cci = new CCI({
       open : [],
       high : [],
       low : [],
@@ -54,10 +54,10 @@ describe('CCI (Commodity Channel Index', function () {
       period : 20
     });
 
-    var results = [];
+    let results = [];
 
     inputCCI.close.forEach((price,index) => {
-      var result = cci.nextValue({
+      let result = cci.nextValue({
           open : inputCCI.open[index],
           high : inputCCI.high[index],
           low : inputCCI.low[index],

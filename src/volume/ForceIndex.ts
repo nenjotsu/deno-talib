@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { EMA } from '../moving_averages/EMA.ts';
 import { CandleData } from '../StockData.ts';
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
@@ -14,9 +15,9 @@ export class ForceIndex extends Indicator {
   generator:IterableIterator<number | undefined>;;
   constructor(input:ForceIndexInput) {
     super(input);
-    var closes = input.close;
-    var volumes = input.volume;
-    var period = input.period || 1
+    let closes = input.close;
+    let volumes = input.volume;
+    let period = input.period || 1
     
     if(!((volumes.length === closes.length))){
       throw ('Inputs(volume, close) not of equal size');
@@ -25,8 +26,8 @@ export class ForceIndex extends Indicator {
     this.result = [];
 
     this.generator = (function* (){
-      var previousTick = yield;
-      var tick = yield;
+      let previousTick = yield;
+      let tick = yield;
       let forceIndex;
       while (true) {
         forceIndex = (tick.close - previousTick.close) * tick.volume;
@@ -38,7 +39,7 @@ export class ForceIndex extends Indicator {
     this.generator.next();
 
     volumes.forEach((tick,index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         close : closes[index],
         volume : volumes[index]
       });
@@ -60,7 +61,7 @@ export class ForceIndex extends Indicator {
 
 export function forceindex(input:ForceIndexInput):number[] {
     Indicator.reverseInputs(input);
-    var result = new ForceIndex(input).result;
+    let result = new ForceIndex(input).result;
     if(input.reversedInput) {
         result.reverse();
     }

@@ -49,7 +49,7 @@ export class LinkedList {
     }
 
     public pop () {
-        var tail = this._tail
+        let tail = this._tail
         if (this._length === 0) {
             return
         }
@@ -68,7 +68,7 @@ export class LinkedList {
     }
 
     public shift() {
-        var head = this._head
+        let head = this._head
         if (this._length === 0)  {
             return
         }
@@ -95,7 +95,7 @@ export class LinkedList {
     }
     
     public unshiftCurrent() {
-        var current = this._current
+        let current = this._current
         if (current === this._head || this._length < 2) {
             return current && current.data
         }
@@ -119,7 +119,7 @@ export class LinkedList {
     }
 
     public removeCurrent() {
-        var current = this._current
+        let current = this._current
         if (this._length === 0) {
             return
         }
@@ -151,7 +151,7 @@ export class LinkedList {
     }
 
     public next() {
-        var next = this._next
+        let next = this._next
         if (next !== undefined) {
             this._next = next.next
             this._current = next

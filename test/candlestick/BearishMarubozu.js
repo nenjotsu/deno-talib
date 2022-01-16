@@ -1,9 +1,9 @@
-var BearishMarubozu = require('../../lib/candlestick/BearishMarubozu').default;
-var assert = require('assert');
-var drawCandleStick         = require('draw-candlestick');
-var fs                      = require('fs');
+let BearishMarubozu = require('../../lib/candlestick/BearishMarubozu').default;
+let assert = require('assert');
+let drawCandleStick         = require('draw-candlestick');
+let fs                      = require('fs');
 
-var input = {
+let input = {
   close: [30.50],
   open: [31.23],
   high: [31.23],
@@ -12,12 +12,12 @@ var input = {
 
 describe('BearishMarubozu : ', function() {
    before(function() {
-    var imageBuffer = drawCandleStick(input);
+    let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BearishMarubozu.png',imageBuffer);
   });
   it('Check whether the supplied data has BearishMarubozu pattern', function() {
-   var bearishMarubozu = new BearishMarubozu();
-   var result = bearishMarubozu.hasPattern(input);
+   let bearishMarubozu = new BearishMarubozu();
+   let result = bearishMarubozu.hasPattern(input);
    assert.deepEqual(result, true, 'Invalid result for BearishMarubozu');
   });
 })

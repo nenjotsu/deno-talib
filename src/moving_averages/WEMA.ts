@@ -10,18 +10,18 @@ export class WEMA extends Indicator {
   generator: IterableIterator<number | undefined>;
   constructor(input: MAInput) {
     super(input);
-    var period = input.period;
-    var priceArray = input.values;
-    var exponent = 1 / period;
-    var sma: SMA;
+    let period = input.period;
+    let priceArray = input.values;
+    let exponent = 1 / period;
+    let sma: SMA;
 
     this.result = [];
 
     sma = new SMA({ period: period, values: [] });
 
-    var genFn = function* (): IterableIterator<number | undefined> {
-      var tick = yield;
-      var prevEma;
+    let genFn = function* (): IterableIterator<number | undefined> {
+      let tick = yield;
+      let prevEma;
       while (true) {
         if (prevEma !== undefined && tick !== undefined) {
           prevEma = (tick - prevEma) * exponent + prevEma;
@@ -40,7 +40,7 @@ export class WEMA extends Indicator {
     this.generator.next();
 
     priceArray.forEach(tick => {
-      var result = this.generator.next(tick);
+      let result = this.generator.next(tick);
       if (result.value != undefined) {
         this.result.push(this.format(result.value));
       }
@@ -50,14 +50,14 @@ export class WEMA extends Indicator {
   static calculate = wema;
 
   nextValue(price: number): number | undefined {
-    var result = this.generator.next(price).value;
+    let result = this.generator.next(price).value;
     if (result != undefined) return this.format(result);
   }
 }
 
 export function wema(input: MAInput): number[] {
   Indicator.reverseInputs(input);
-  var result = new WEMA(input).result;
+  let result = new WEMA(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

@@ -1,15 +1,15 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-var SMA = require('../../lib/moving_averages/SMA').SMA;
-var assert = require('assert');
-var data   = require('../data')
+let SMA = require('../../lib/moving_averages/SMA').SMA;
+let assert = require('assert');
+let data   = require('../data')
 
-var prices = data.close;
+let prices = data.close;
 
-var period = 10;
+let period = 10;
 
-var expectResult =  [
+let expectResult =  [
          139.438,
          142.908,
          147.901,
@@ -28,15 +28,15 @@ describe('SMA (Simple Moving Average)', function() {
   });
 
   it('should be able to calculate EMA by using getResult', function() {
-      var smaProducer = new SMA({period : period, values : prices});
+      let smaProducer = new SMA({period : period, values : prices});
       assert.deepEqual(smaProducer.getResult(),  expectResult, 'Wrong Results while calculating next bar');
   });
 
   it('should be able to get EMA for the next bar using nextValue', function() {
-    var smaProducer = new SMA({period : period, values : []});
-    var results = [];
+    let smaProducer = new SMA({period : period, values : []});
+    let results = [];
     prices.forEach(price => {
-      var result = smaProducer.nextValue(price);
+      let result = smaProducer.nextValue(price);
       if(result)
         results.push(result)
     });

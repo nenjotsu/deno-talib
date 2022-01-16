@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { CandleData } from '../StockData.ts';
 import LinkedList from '../Utils/FixedSizeLinkedList.ts';
@@ -24,18 +25,18 @@ export class IchimokuCloud extends Indicator{
 	constructor(input:IchimokuCloudInput) {
         super(input);
         this.result = [];
-		var defaults = {
+		let defaults = {
 			conversionPeriod : 9,
 			basePeriod       : 26,
 			spanPeriod       : 52,
 			displacement     : 26
 		}
 
-		var params = (Object as any).assign({}, defaults, input)
+		let params = (Object as any).assign({}, defaults, input)
 
-		var currentConversionData = new LinkedList(params.conversionPeriod * 2, true, true, false);
-		var currentBaseData = new LinkedList(params.basePeriod * 2, true, true, false);
-		var currenSpanData = new LinkedList(params.spanPeriod * 2, true, true, false);
+		let currentConversionData = new LinkedList(params.conversionPeriod * 2, true, true, false);
+		let currentBaseData = new LinkedList(params.basePeriod * 2, true, true, false);
+		let currenSpanData = new LinkedList(params.spanPeriod * 2, true, true, false);
 
 		this.generator = (function* () {
 			let result:IchimokuCloudOutput
@@ -91,7 +92,7 @@ export class IchimokuCloud extends Indicator{
         
         this.generator.next();
         input.low.forEach((tick, index) => {
-                var result = this.generator.next({ 
+                let result = this.generator.next({ 
                     high : input.high[index],
                     low : input.low[index],
                 });
@@ -112,7 +113,7 @@ export class IchimokuCloud extends Indicator{
 
 export function ichimokucloud(input:IchimokuCloudInput):IchimokuCloudOutput[] {
     Indicator.reverseInputs(input);
-     var result = new IchimokuCloud(input).result;
+     let result = new IchimokuCloud(input).result;
      if(input.reversedInput) {
          result.reverse();
      }

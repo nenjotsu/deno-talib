@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Created by AAravindan on 5/17/16.
  */
@@ -15,10 +16,10 @@ export class ADL extends Indicator {
   generator:IterableIterator<number | undefined>;
     constructor (input:ADLInput) {
       super(input);
-      var highs       = input.high;
-      var lows        = input.low;
-      var closes      = input.close;
-      var volumes     = input.volume;
+      let highs       = input.high;
+      let lows        = input.low;
+      let closes      = input.close;
+      let volumes     = input.volume;
 
       if(!((lows.length === highs.length) && (highs.length === closes.length) && (highs.length === volumes.length) )){
         throw ('Inputs(low,high, close, volumes) not of equal size');
@@ -27,8 +28,8 @@ export class ADL extends Indicator {
       this.result = [];
 
       this.generator = (function* (){
-        var result = 0;
-        var tick;
+        let result = 0;
+        let tick;
         tick = yield;
         while (true)
         {
@@ -43,13 +44,13 @@ export class ADL extends Indicator {
       this.generator.next();
 
       highs.forEach((tickHigh, index) => {
-        var tickInput = {
+        let tickInput = {
           high    : tickHigh,
           low     : lows[index],
           close   : closes[index],
           volume  : volumes[index]
         }
-        var result = this.generator.next(tickInput);
+        let result = this.generator.next(tickInput);
         if(result.value != undefined){
           this.result.push(result.value);
         }
@@ -65,7 +66,7 @@ export class ADL extends Indicator {
 
 export function adl(input:ADLInput):number[] {
       Indicator.reverseInputs(input);
-      var result = new ADL(input).result;
+      let result = new ADL(input).result;
       if(input.reversedInput) {
           result.reverse();
       }

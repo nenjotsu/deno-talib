@@ -12,7 +12,7 @@ let expectResult = [ 10, 20, 30, 20, 10, 10, 10, 16, 15 ]
 
 describe('Lowest', function() {
   it('should calculate Lowest using the calculate method', function() {
-    var result = Lowest.calculate(input);
+    let result = Lowest.calculate(input);
     assert.deepEqual(result, expectResult, 'Wrong Results');
   });
 })

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { WilderSmoothing } from '../moving_averages/WilderSmoothing.ts';
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { MDM } from   './MinusDM.ts';
@@ -26,28 +27,28 @@ export class ADX extends Indicator {
   generator:IterableIterator<ADXOutput | undefined>;;
   constructor(input:ADXInput) {
     super(input);
-    var lows = input.low;
-    var highs = input.high;
-    var closes = input.close;
-    var period = input.period;
-    var format = this.format;
+    let lows = input.low;
+    let highs = input.high;
+    let closes = input.close;
+    let period = input.period;
+    let format = this.format;
 
-    var plusDM = new PDM({
+    let plusDM = new PDM({
       high: [],
       low : []
     });
 
-    var minusDM = new MDM({
+    let minusDM = new MDM({
       high: [],
       low : []
     });
 
-    var emaPDM = new WilderSmoothing({period: period, values:[], format : (v) => {return v}});
-    var emaMDM = new WilderSmoothing({period: period, values:[], format : (v) => {return v}});
-    var emaTR  = new WilderSmoothing({period: period, values:[], format : (v) => {return v}});
-    var emaDX  = new WEMA({period: period, values:[], format : (v) => {return v}});
+    let emaPDM = new WilderSmoothing({period: period, values:[], format : (v) => {return v}});
+    let emaMDM = new WilderSmoothing({period: period, values:[], format : (v) => {return v}});
+    let emaTR  = new WilderSmoothing({period: period, values:[], format : (v) => {return v}});
+    let emaDX  = new WEMA({period: period, values:[], format : (v) => {return v}});
 
-    var tr    = new TrueRange({
+    let tr    = new TrueRange({
       low : [],
       high: [],
       close: [],
@@ -60,9 +61,9 @@ export class ADX extends Indicator {
     this.result = [];
 ADXOutput
     this.generator = (function* (){
-      var tick = yield;
-      var index = 0;
-      var lastATR,lastAPDM,lastAMDM,lastPDI,lastMDI,lastDX,smoothedDX;
+      let tick = yield;
+      let index = 0;
+      let lastATR,lastAPDM,lastAMDM,lastPDI,lastMDI,lastDX,smoothedDX;
       lastATR = 0;
       lastAPDM = 0;
       lastAMDM = 0;
@@ -93,7 +94,7 @@ ADXOutput
     this.generator.next();
 
     lows.forEach((tick,index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high : highs[index],
         low  : lows[index],
         close : closes[index]
@@ -116,7 +117,7 @@ ADXOutput
 
 export function adx(input:ADXInput):ADXOutput[] {
     Indicator.reverseInputs(input);
-    var result = new ADX(input).result;
+    let result = new ADX(input).result;
     if(input.reversedInput) {
         result.reverse();
     }

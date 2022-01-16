@@ -1,15 +1,15 @@
-var CandlestickFinder = require('../../lib/candlestick/CandlestickFinder').default;
-var assert = require('assert');
+let CandlestickFinder = require('../../lib/candlestick/CandlestickFinder').default;
+let assert = require('assert');
 
 
-var input = {
+let input = {
   open: [30.10,30.18,30.15,29.15,28.35,29.19,28.83,28.13,28.17,28.35,28.34],
   high: [30.20,30.28,30.45,29.35,29.35,29.29,28.83,28.73,28.67,28.85,28.64],
   low:  [29.41,29.32,29.96,28.74,28.56,28.41,28.08,27.43,27.66,27.83,27.40],
   close:[29.87,30.24,30.10,28.90,28.92,28.48,28.56,27.56,28.47,28.28,27.49],
 }
 
-var expectResult =  [
+let expectResult =  [
   {
     "open": [
       30.1,
@@ -235,7 +235,7 @@ let singleLastData = {
 
 describe('Common candlestick utilities : ', function() {
   it('Generate candlestick should generate subset of data based on supplied data', function() {
-   var results = CandlestickFinder.prototype._generateDataForCandleStick.call({ requiredCount : 3 }, input);
+   let results = CandlestickFinder.prototype._generateDataForCandleStick.call({ requiredCount : 3 }, input);
    assert.deepEqual(results.length, input.close.length - (3 -1), 'Wrong subset length of data while generating data for candlestick');
    assert.deepEqual(results, expectResult, 'Wrong subset of data while generating data for candlestick');
   })
@@ -251,15 +251,15 @@ describe('Common candlestick utilities : ', function() {
   })
   
   it('Approximate Equal return true when value is less than 0.1 percent of difference', function() {
-   var results = CandlestickFinder.prototype.approximateEqual.call(null ,1 , 1.001);
+   let results = CandlestickFinder.prototype.approximateEqual.call(null ,1 , 1.001);
    assert.deepEqual(results, true, 'Approximate equal returns fals when true');
-   var results = CandlestickFinder.prototype.approximateEqual.call(null ,10 , 10.01);
+   let results = CandlestickFinder.prototype.approximateEqual.call(null ,10 , 10.01);
    assert.deepEqual(results, true, 'Approximate equal returns fals when true');
-   var results = CandlestickFinder.prototype.approximateEqual.call(null ,100 , 100.1);
+   let results = CandlestickFinder.prototype.approximateEqual.call(null ,100 , 100.1);
    assert.deepEqual(results, true, 'Approximate equal returns fals when true');
-   var results = CandlestickFinder.prototype.approximateEqual.call(null ,1000 , 1001);
+   let results = CandlestickFinder.prototype.approximateEqual.call(null ,1000 , 1001);
    assert.deepEqual(results, true, 'Approximate equal returns fals when true');
-   var results = CandlestickFinder.prototype.approximateEqual.call(null ,10000 , 10010);
+   let results = CandlestickFinder.prototype.approximateEqual.call(null ,10000 , 10010);
    assert.deepEqual(results, true, 'Approximate equal returns fals when true');
   })
 })

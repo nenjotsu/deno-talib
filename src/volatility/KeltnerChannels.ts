@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { SMA } from '../moving_averages/SMA.ts';
 import { EMA } from '../moving_averages/EMA.ts';
@@ -26,20 +26,20 @@ export class KeltnerChannels extends Indicator {
   generator:IterableIterator<KeltnerChannelsOutput | undefined>;
     constructor (input:KeltnerChannelsInput) {
       super(input);
-      var maType = input.useSMA ? SMA : EMA;
-      var maProducer = new maType({period : input.maPeriod, values : [], format : (v) => {return v}});
-      var atrProducer = new ATR({period : input.atrPeriod, high : [], low : [], close : [], format : (v) => {return v}});
-      var tick;
+      let maType = input.useSMA ? SMA : EMA;
+      let maProducer = new maType({period : input.maPeriod, values : [], format : (v) => {return v}});
+      let atrProducer = new ATR({period : input.atrPeriod, high : [], low : [], close : [], format : (v) => {return v}});
+      let tick;
       this.result = [];
       this.generator = (function* (){
-        var KeltnerChannelsOutput
-        var result;
+        let KeltnerChannelsOutput
+        let result;
         tick = yield;
         while (true)
         {
-          var { close } = tick;
-          var ma = maProducer.nextValue(close);
-          var atr = atrProducer.nextValue(tick)
+          let { close } = tick;
+          let ma = maProducer.nextValue(close);
+          let atr = atrProducer.nextValue(tick)
           if(ma!=undefined && atr!=undefined) {
             result = {
               middle : ma,
@@ -53,15 +53,15 @@ export class KeltnerChannels extends Indicator {
 
       this.generator.next();
 
-      var highs = input.high;
+      let highs = input.high;
 
       highs.forEach((tickHigh, index) => {
-        var tickInput = {
+        let tickInput = {
           high    : tickHigh,
           low     : input.low[index],
           close   : input.close[index],
         }
-        var result = this.generator.next(tickInput);
+        let result = this.generator.next(tickInput);
         if(result.value != undefined){
           this.result.push(result.value);
         }
@@ -71,7 +71,7 @@ export class KeltnerChannels extends Indicator {
   static calculate = keltnerchannels;
 
   nextValue(price:KeltnerChannelsInput):KeltnerChannelsOutput | undefined {
-     var result =  this.generator.next(price);
+     let result =  this.generator.next(price);
      if(result.value != undefined){
         return result.value;
       }
@@ -80,7 +80,7 @@ export class KeltnerChannels extends Indicator {
 
 export function keltnerchannels(input:KeltnerChannelsInput):KeltnerChannelsOutput[] {
       Indicator.reverseInputs(input);
-      var result = new KeltnerChannels(input).result;
+      let result = new KeltnerChannels(input).result;
       if(input.reversedInput) {
           result.reverse();
       }

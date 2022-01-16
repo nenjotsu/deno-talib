@@ -2,16 +2,16 @@
  * Created by AAravindan on 5/3/16.
  */
 "use strict"
-var BB = require('../../lib/volatility/BollingerBands').BollingerBands;
-var assert = require('assert');
-var data = require('../data')
+let BB = require('../../lib/volatility/BollingerBands').BollingerBands;
+let assert = require('assert');
+let data = require('../data')
 
-var prices = data.close;
+let prices = data.close;
 
-var period = 10;
+let period = 10;
 
-var stdDev = 2;
-var expectResult = [
+let stdDev = 2;
+let expectResult = [
   {
     "lower": 124.13430685095913,
     "middle": 139.438,
@@ -75,15 +75,15 @@ describe('BB (Bollinger Bands)', function () {
   });
 
   it('should be able to calculate BB by using getResult', function () {
-    var bb = new BB({ period: period, values: prices, stdDev: stdDev });
+    let bb = new BB({ period: period, values: prices, stdDev: stdDev });
     assert.deepEqual(bb.getResult(), expectResult, 'Wrong Results while calculating next bar');
   });
 
   it('should be able to get BB for the next bar using nextValue', function () {
-    var bb = new BB({ period: period, values: [], stdDev: stdDev });
-    var results = [];
+    let bb = new BB({ period: period, values: [], stdDev: stdDev });
+    let results = [];
     prices.forEach(price => {
-      var result = bb.nextValue(price);
+      let result = bb.nextValue(price);
       if (result)
         results.push(result)
     });

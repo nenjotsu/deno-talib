@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { IndicatorInput, Indicator } from '../indicator/indicator.ts';
 /**
  * Created by AAravindan on 5/10/16.
@@ -51,7 +52,7 @@ export class Stochastic extends Indicator {
         format : (v) => {return v}
       });
       let k,d;
-      var tick = yield;
+      let tick = yield;
       while (true) {
         pastHighPeriods.push(tick.high);
         pastLowPeriods.push(tick.low);
@@ -74,7 +75,7 @@ export class Stochastic extends Indicator {
     this.generator.next();
 
     lows.forEach((tick, index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high : highs[index],
         low  : lows[index],
         close : closes[index]
@@ -96,7 +97,7 @@ export class Stochastic extends Indicator {
 
 export function stochastic(input:StochasticInput):StochasticOutput[] {
         Indicator.reverseInputs(input);
-        var result = new Stochastic(input).result;
+        let result = new Stochastic(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

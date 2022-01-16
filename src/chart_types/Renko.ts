@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { CandleData, CandleList } from '../StockData.ts';
 import { atr } from '../directionalmovement/ATR.ts';
 
@@ -23,7 +24,7 @@ class Renko extends Indicator{
     generator:IterableIterator<CandleData | undefined>;
     constructor(input:RenkoInput) {
       super(input);
-      var format = this.format;
+      let format = this.format;
       let useATR = input.useATR;
       let brickSize = input.brickSize || 0;
       if(useATR) {
@@ -86,7 +87,7 @@ class Renko extends Indicator{
 
       this.generator.next();
       input.low.forEach((tick, index) => {
-            var result = this.generator.next({ 
+            let result = this.generator.next({ 
                 open : input.open[index],
                 high : input.high[index],
                 low : input.low[index],
@@ -115,7 +116,7 @@ class Renko extends Indicator{
 
 export function renko(input:RenkoInput):CandleList {
        Indicator.reverseInputs(input);
-        var result = new Renko(input).result;
+        let result = new Renko(input).result;
         if(input.reversedInput) {
             result.open.reverse();
             result.high.reverse();

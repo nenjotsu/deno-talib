@@ -20,31 +20,31 @@ export class ATR extends Indicator {
   generator:IterableIterator<number | undefined>;
   constructor(input:ATRInput) {
     super(input);
-    var lows = input.low;
-    var highs = input.high;
-    var closes = input.close;
-    var period = input.period;
-    var format = this.format;
+    let lows = input.low;
+    let highs = input.high;
+    let closes = input.close;
+    let period = input.period;
+    let format = this.format;
 
     if(!((lows.length === highs.length) && (highs.length === closes.length) )){
       throw ('Inputs(low,high, close) not of equal size');
     }
 
-    var trueRange = new TrueRange({
+    let trueRange = new TrueRange({
       low : [],
       high: [],
       close: []
     });
 
 
-    var wema = new WEMA({period : period, values : [], format : (v) => {return v}});
+    let wema = new WEMA({period : period, values : [], format : (v) => {return v}});
 
 
     this.result = [];
 
     this.generator = (function* (){
-      var tick = yield;
-      var avgTrueRange,trange;;
+      let tick = yield;
+      let avgTrueRange,trange;;
       while (true) {
         trange = trueRange.nextValue({
           low : tick.low,
@@ -63,7 +63,7 @@ export class ATR extends Indicator {
     this.generator.next();
 
     lows.forEach((tick,index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high : highs[index],
         low  : lows[index],
         close : closes[index]
@@ -84,7 +84,7 @@ export class ATR extends Indicator {
 
 export function atr(input:ATRInput):number[] {
   Indicator.reverseInputs(input);
-  var result = new ATR(input).result;
+  let result = new ATR(input).result;
   if(input.reversedInput) {
       result.reverse();
   }

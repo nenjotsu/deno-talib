@@ -1,17 +1,17 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-var sma = require('../dist/index.js').sma;
-var cci = require('../dist/index.js').cci;
-var AvailableIndicators = require('../dist/index.js').getAvailableIndicators;
-var assert = require('assert');
-var data   = require('./data')
+let sma = require('../dist/index.js').sma;
+let cci = require('../dist/index.js').cci;
+let AvailableIndicators = require('../dist/index.js').getAvailableIndicators;
+let assert = require('assert');
+let data   = require('./data')
 
-var prices = data.close;
+let prices = data.close;
 
-var period = 10;
+let period = 10;
 
-var expectResult =  [
+let expectResult =  [
     139.438,
     142.908,
     147.901,

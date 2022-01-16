@@ -1,8 +1,8 @@
 "use strict"
-var ForceIndex = require('../../lib/volume/ForceIndex').ForceIndex;
-var assert = require("assert");
+let ForceIndex = require('../../lib/volume/ForceIndex').ForceIndex;
+let assert = require("assert");
 
-var inputForceIndex = {
+let inputForceIndex = {
   open : [
 
   ],
@@ -18,7 +18,7 @@ var inputForceIndex = {
   ],
   period : 1
 };
-var expectedResult = [
+let expectedResult = [
     -4558,-16571,-1035,-2080,-3747,11025,17737,12216,-1666,5879,-6647,2325,1337,-15133,5680
 ];
 
@@ -31,12 +31,12 @@ describe('ForceIndex (Force Index', function () {
   });
 
   it('should be able to get ForceIndex for the next bar', function () {
-    var forceIndex = new ForceIndex(inputForceIndex);
+    let forceIndex = new ForceIndex(inputForceIndex);
     assert.deepEqual(forceIndex.getResult().map(Math.round), expectedResult, 'Wrong Results while getting results');
   })
 
   it('should be able to get ForceIndex for the next bar using nextValue', function () {
-    var forceIndex = new ForceIndex({
+    let forceIndex = new ForceIndex({
       open : [],
       high : [],
       low : [],
@@ -44,10 +44,10 @@ describe('ForceIndex (Force Index', function () {
       volume : []
     });
 
-    var results = [];
+    let results = [];
 
     inputForceIndex.close.forEach((price,index) => {
-      var result = forceIndex.nextValue({
+      let result = forceIndex.nextValue({
           open : inputForceIndex.open[index],
           high : inputForceIndex.high[index],
           low : inputForceIndex.low[index],

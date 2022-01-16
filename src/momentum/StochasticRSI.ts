@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { IndicatorInput, Indicator } from '../indicator/indicator.ts';
 /**
  * Created by AAravindan on 5/10/16.
@@ -45,11 +46,11 @@ export class StochasticRSI extends Indicator {
         format : (v) => {return v}
       });
       let lastRSI, stochasticRSI, d, result;
-      var tick = yield;
+      let tick = yield;
       while (true) {
         lastRSI = rsi.nextValue(tick);
         if(lastRSI !== undefined) {
-          var stochasticInput  = { high : lastRSI, low : lastRSI, close: lastRSI } as any;
+          let stochasticInput  = { high : lastRSI, low : lastRSI, close: lastRSI } as any;
           stochasticRSI = stochastic.nextValue(stochasticInput);
           if(stochasticRSI !== undefined && stochasticRSI.d !== undefined) {
             d = dSma.nextValue(stochasticRSI.d);
@@ -68,7 +69,7 @@ export class StochasticRSI extends Indicator {
     this.generator.next();
 
     closes.forEach((tick, index) => {
-      var result = this.generator.next(tick);
+      let result = this.generator.next(tick);
       if(result.value !== undefined){
         this.result.push(result.value);
       }
@@ -86,7 +87,7 @@ export class StochasticRSI extends Indicator {
 
 export function stochasticrsi(input:StochasticRsiInput):StochasticRSIOutput[] {
     Indicator.reverseInputs(input);
-    var result = new StochasticRSI(input).result;
+    let result = new StochasticRSI(input).result;
     if(input.reversedInput) {
         result.reverse();
     }

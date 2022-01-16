@@ -1,8 +1,8 @@
 "use strict"
-var VWAP = require('../../lib/volume/VWAP').VWAP;
-var assert = require("assert");
+let VWAP = require('../../lib/volume/VWAP').VWAP;
+let assert = require("assert");
 
-var inputVWAP = {
+let inputVWAP = {
   open : [
 
   ],
@@ -19,7 +19,7 @@ var inputVWAP = {
     89329,16137,23945,20679,27252,20915,17372,17600,13896,6700,13848,9925,5540,10803,19400
   ],
 };
-var expectedResult = [
+let expectedResult = [
     127.21,127.20,127.20,127.17,127.15,127.14,127.13,127.12,127.12,127.12,127.12,127.13,127.13,127.14,127.15
 ];
 
@@ -32,12 +32,12 @@ describe('VWAP (Commodity Channel Index', function () {
   });
 
   it('should be able to get VWAP for the next bar', function () {
-    var vwap = new VWAP(inputVWAP);
+    let vwap = new VWAP(inputVWAP);
     assert.deepEqual(vwap.getResult().map((val)=>val.toFixed(2)), expectedResult, 'Wrong Results while getting results');
   })
 
   it('should be able to get VWAP for the next bar using nextValue', function () {
-    var vwap = new VWAP({
+    let vwap = new VWAP({
       open : [],
       high : [],
       low : [],
@@ -45,10 +45,10 @@ describe('VWAP (Commodity Channel Index', function () {
       volume : []
     });
 
-    var results = [];
+    let results = [];
 
     inputVWAP.close.forEach((price,index) => {
-      var result = vwap.nextValue({
+      let result = vwap.nextValue({
           open : inputVWAP.open[index],
           high : inputVWAP.high[index],
           low : inputVWAP.low[index],

@@ -15,12 +15,12 @@ export class AverageGain extends Indicator {
     let format = this.format;
 
     this.generator = (function* (period){
-      var currentValue = yield;
-      var counter = 1;
-      var gainSum = 0;
-      var avgGain;
-      var gain;
-      var lastValue = currentValue;
+      let currentValue = yield;
+      let counter = 1;
+      let gainSum = 0;
+      let avgGain;
+      let gain;
+      let lastValue = currentValue;
       currentValue = yield
       while(true){
         gain = currentValue - lastValue;
@@ -47,7 +47,7 @@ export class AverageGain extends Indicator {
     this.result = [];
 
     values.forEach((tick:number) => {
-      var result = this.generator.next(tick);
+      let result = this.generator.next(tick);
       if(result.value !== undefined){
         this.result.push(result.value);
       }
@@ -63,7 +63,7 @@ export class AverageGain extends Indicator {
 
 export function averagegain(input:AvgGainInput):number[] {
        Indicator.reverseInputs(input);
-        var result = new AverageGain(input).result;
+        let result = new AverageGain(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

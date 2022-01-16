@@ -3,7 +3,7 @@
 let assert = require('assert');
 let KeltnerChannels    = require('../../lib/volatility/KeltnerChannels').KeltnerChannels;
 
-var input = {
+let input = {
   useSMA : false,
   maPeriod : 20,
   atrPeriod : 10,
@@ -751,7 +751,7 @@ let expectResult = [
 
 describe('KeltnerChannels', function() {
   it('should calculate KeltnerChannels using the calculate method', function() {
-    var out  = KeltnerChannels.calculate(input);
+    let out  = KeltnerChannels.calculate(input);
     require('fs').writeFileSync('keltner', JSON.stringify(out, null, 2))
     assert.deepEqual(out, expectResult, 'Wrong Results');
   });

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { SMA } from '../moving_averages/SMA.ts';
 import { ROC } from './ROC.ts';
@@ -48,7 +49,7 @@ export class KST extends Indicator {
     let sma3        = new SMA({ period : smaPer3, values: [], format : (v) => {return v}});
     let sma4        = new SMA({ period : smaPer4, values: [], format : (v) => {return v}});
     let signalSMA   = new SMA({ period : signalPeriod, values: [], format : (v) => {return v}})
-    var format = this.format;
+    let format = this.format;
     this.result = [];
 
     let firstResult = Math.max(rocPer1 + smaPer1, rocPer2+smaPer2, rocPer3+smaPer3, rocPer4+smaPer4);
@@ -102,7 +103,7 @@ export class KST extends Indicator {
 
 export function kst(input:KSTInput):KSTOutput[] {
        Indicator.reverseInputs(input);
-        var result = new KST(input).result;
+        let result = new KST(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

@@ -1,9 +1,9 @@
-var ShootingStar    = require('../../lib/candlestick/ShootingStarUnconfirmed').default;
-var assert          = require('assert');
-var drawCandleStick = require('draw-candlestick');
-var fs              = require('fs');
+let ShootingStar    = require('../../lib/candlestick/ShootingStarUnconfirmed').default;
+let assert          = require('assert');
+let drawCandleStick = require('draw-candlestick');
+let fs              = require('fs');
 
-var shootingStarData = [
+let shootingStarData = [
   {
     name: 'Bearish',
     data: {
@@ -27,14 +27,14 @@ var shootingStarData = [
 describe('Shooting Star (Unconfirmed) : ', function() {
    before(function() {
     shootingStarData.forEach((patternSet) => {
-      var imageBuffer = drawCandleStick(patternSet.data);
+      let imageBuffer = drawCandleStick(patternSet.data);
       fs.writeFileSync(`${__dirname}/images/${patternSet.name.replace(' ', '')}ShootingStarUnconfirmed.png`,imageBuffer);
     });
   });
   shootingStarData.forEach((patternSet) => {
     it(`Check whether the supplied data has Shooting Star (Unconfirmed): ${patternSet.name}`, function() {
-      var hangingMan = new ShootingStar();
-      var result = hangingMan.hasPattern(patternSet.data);
+      let hangingMan = new ShootingStar();
+      let result = hangingMan.hasPattern(patternSet.data);
       assert.deepEqual(result, true, `Invalid result for Shooting Star (Unconfirmed): ${patternSet.name}`);
      });
   });

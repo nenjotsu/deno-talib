@@ -1,9 +1,9 @@
-var ThreeBlackCrows = require('../../lib/candlestick/ThreeBlackCrows').default;
-var assert = require('assert');
-var drawCandleStick         = require('draw-candlestick');
-var fs                      = require('fs');
+let ThreeBlackCrows = require('../../lib/candlestick/ThreeBlackCrows').default;
+let assert = require('assert');
+let drawCandleStick         = require('draw-candlestick');
+let fs                      = require('fs');
 
-var input = {
+let input = {
   open: [21.65,21.48,21.25],
   high: [21.82,21.57,21.35],
   close: [21.32,21.10,20.70],
@@ -12,12 +12,12 @@ var input = {
 
 describe('ThreeBlackCrows : ', function() {
   before(function() {
-    var imageBuffer = drawCandleStick(input);
+    let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/ThreeBlackCrows.png',imageBuffer);
   });
   it('Check whether the supplied data has ThreeBlackCrows pattern', function() {
-   var threeBlackCrows = new ThreeBlackCrows ();
-   var result      = threeBlackCrows.hasPattern(input);
+   let threeBlackCrows = new ThreeBlackCrows ();
+   let result      = threeBlackCrows.hasPattern(input);
    assert.deepEqual(result, true, 'Invalid result for ThreeBlackCrows');
   });
 })

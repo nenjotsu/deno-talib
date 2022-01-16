@@ -1,9 +1,9 @@
-var HammerPattern   = require('../../lib/candlestick/HammerPatternUnconfirmed').default;
-var assert          = require('assert');
-var drawCandleStick = require('draw-candlestick');
-var fs              = require('fs');
+let HammerPattern   = require('../../lib/candlestick/HammerPatternUnconfirmed').default;
+let assert          = require('assert');
+let drawCandleStick = require('draw-candlestick');
+let fs              = require('fs');
 
-var hammerData = [
+let hammerData = [
   {
     name: 'Bearish',
     data: {
@@ -45,14 +45,14 @@ var hammerData = [
 describe('Hammer Pattern (Unconfirmed) : ', function() {
    before(function() {
     hammerData.forEach((patternSet) => {
-      var imageBuffer = drawCandleStick(patternSet.data);
+      let imageBuffer = drawCandleStick(patternSet.data);
       fs.writeFileSync(`${__dirname}/images/${patternSet.name.replace(' ', '')}HammerPatternUnconfirmed.png`,imageBuffer);
     });
   });
   hammerData.forEach((patternSet) => {
     it(`Check whether the supplied data has Hammer Pattern (Unconfirmed): ${patternSet.name}`, function() {
-      var Hammer = new HammerPattern();
-      var result = Hammer.hasPattern(patternSet.data);
+      let Hammer = new HammerPattern();
+      let result = Hammer.hasPattern(patternSet.data);
       assert.deepEqual(result, true, `Invalid result for Hammer Pattern (Unconfirmed): ${patternSet.name}`);
      });
   });

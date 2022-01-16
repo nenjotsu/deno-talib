@@ -18,14 +18,14 @@ export class CrossUp extends Indicator {
     this.lineA = input.lineA;
     this.lineB = input.lineB;
     // @ts-ignore
-    var currentLineA = [];
+    let currentLineA = [];
     // @ts-ignore
-    var currentLineB = [];
+    let currentLineB = [];
 
     const genFn = function* (): IterableIterator<true | false> {
       // @ts-ignore
-      var current = yield;
-      var result = false;
+      let current = yield;
+      let result = false;
 
       while (true) {
         // @ts-ignore
@@ -35,7 +35,7 @@ export class CrossUp extends Indicator {
         // @ts-ignore
         result = current.valueA > current.valueB;
 
-        var pointer = 1;
+        let pointer = 1;
         // @ts-ignore
         while (
           result === true &&
@@ -71,7 +71,7 @@ export class CrossUp extends Indicator {
     this.result = [];
     this.lineA.forEach((value, index) => {
       // @ts-ignore
-      var result = this.generator.next({
+      let result = this.generator.next({
         valueA: this.lineA[index],
         valueB: this.lineB[index]
       });
@@ -102,7 +102,7 @@ export class CrossUp extends Indicator {
 
 export function crossUp(input: CrossInput): boolean[] {
   Indicator.reverseInputs(input);
-  var result = new CrossUp(input).result;
+  let result = new CrossUp(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

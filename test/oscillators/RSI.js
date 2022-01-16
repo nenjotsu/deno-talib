@@ -1,15 +1,15 @@
 "use strict"
-var RSI = require('../../lib/oscillators/RSI').RSI;
-var AverageGain = require('../../lib/Utils/AverageGain').AverageGain;
-var AverageLoss = require('../../lib/Utils/AverageLoss').AverageLoss;
-var assert = require("assert");
-var data = require('../data');
+let RSI = require('../../lib/oscillators/RSI').RSI;
+let AverageGain = require('../../lib/Utils/AverageGain').AverageGain;
+let AverageLoss = require('../../lib/Utils/AverageLoss').AverageLoss;
+let assert = require("assert");
+let data = require('../data');
 
-var inputRSI = {
+let inputRSI = {
   values : [44.34,44.09,44.15,43.61,44.33,44.83,45.10,45.42,45.84,46.08,45.89,46.03,45.61,46.28,46.28,46.00,46.03,46.41,46.22,45.64,46.21,46.25,45.71,46.45,45.78,45.35,44.03,44.18,44.22,44.57,43.42,42.66,43.13],
   period : 14
 };
-var expectedResult = [
+let expectedResult = [
   70.46,
   66.25,
   66.48,
@@ -32,11 +32,11 @@ var expectedResult = [
 ];
 
 //have issue with this input
-var noGainsInput = {
+let noGainsInput = {
   values : [ 294435, 294435, 294435, 294500, 294500, 294500, 294520, 294539, 294539, 294600, 294600, 294600, 294600, 294600, 294700, 294600, 294600, 294600, 294600, 294600, 294700 ],
   period : 14
  };
- var noGainsExpectedResult = [
+ let noGainsExpectedResult = [
   100, 71.1, 71.1, 71.1, 71.1, 71.1, 79.63
  ];
  
@@ -52,18 +52,18 @@ describe('RSI (Relative Strength Index)', function () {
   });
 
   it('should be able to get RSI for the next bar', function () {
-    var rsi = new RSI(inputRSI);
+    let rsi = new RSI(inputRSI);
     assert.deepEqual(rsi.getResult(), expectedResult, 'Wrong Results while getting results');
   })
 
   it('should be able to get RSI for the next bar using nextValue', function () {
-    var rsi = new RSI({
+    let rsi = new RSI({
       values : [],
       period : 14
     });
-    var results = [];
+    let results = [];
     inputRSI.values.forEach(price => {
-      var result = rsi.nextValue(price);
+      let result = rsi.nextValue(price);
       if (result!==undefined) {
         results.push(result)
       }

@@ -15,11 +15,11 @@ export class VWAP extends Indicator {
   generator:IterableIterator<number | undefined>;;
   constructor(input:VWAPInput) {
     super(input);
-    var lows = input.low;
-    var highs = input.high;
-    var closes = input.close;
-    var volumes = input.volume;
-    var format = this.format;
+    let lows = input.low;
+    let highs = input.high;
+    let closes = input.close;
+    let volumes = input.volume;
+    let format = this.format;
     
     if(!((lows.length === highs.length) && (highs.length === closes.length) )){
       throw ('Inputs(low,high, close) not of equal size');
@@ -28,7 +28,7 @@ export class VWAP extends Indicator {
     this.result = [];
 
     this.generator = (function* (){
-      var tick = yield;
+      let tick = yield;
       let cumulativeTotal = 0;
       let cumulativeVolume = 0;
       while (true) {
@@ -43,7 +43,7 @@ export class VWAP extends Indicator {
     this.generator.next();
 
     lows.forEach((tick,index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high : highs[index],
         low  : lows[index],
         close : closes[index],
@@ -67,7 +67,7 @@ export class VWAP extends Indicator {
 
 export function vwap(input:VWAPInput):number[] {
     Indicator.reverseInputs(input);
-    var result = new VWAP(input).result;
+    let result = new VWAP(input).result;
     if(input.reversedInput) {
         result.reverse();
     }

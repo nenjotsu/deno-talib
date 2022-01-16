@@ -12,7 +12,7 @@ let expectResult = [ 60, 90, 100, 90, 60, 50, 46, 65, 60 ]
 
 describe('Sum', function() {
   it('should calculate Sum using the calculate method', function() {
-    var result = Sum.calculate(input);
+    let result = Sum.calculate(input);
     assert.deepEqual(result, expectResult, 'Wrong Results');
   });
 })

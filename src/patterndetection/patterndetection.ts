@@ -1,17 +1,18 @@
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { getConfig } from '../config.ts';
 // import * as tf from '@tensorflow/tfjs';
 
-var isNodeEnvironment = false;
+let isNodeEnvironment = false;
 
-var model;
-var oneHotMap = ['IHS', 'TU', 'DB', 'HS', 'TD', 'DT'];
+let model;
+let oneHotMap = ['IHS', 'TU', 'DB', 'HS', 'TD', 'DT'];
 
-declare var module;
-declare var __dirname;
-declare var global;
-declare var require;
-var tf; 
+declare let module;
+declare let __dirname;
+declare let global;
+declare let require;
+let tf; 
 
 try {
     isNodeEnvironment = Object.prototype.toString.call(global.process) === '[object process]' ;
@@ -33,18 +34,18 @@ export enum AvailablePatterns {
 }
 
 function interpolateArray(data:any, fitCount:any):number[] {
-    var linearInterpolate = function (before:any, after:any, atPoint:any) {
+    let linearInterpolate = function (before:any, after:any, atPoint:any) {
         return before + (after - before) * atPoint;
     };
 
-    var newData = new Array();
-    var springFactor:any = new Number((data.length - 1) / (fitCount - 1));
+    let newData = new Array();
+    let springFactor:any = new Number((data.length - 1) / (fitCount - 1));
     newData[0] = data[0]; // for new allocation
-    for ( var i = 1; i < fitCount - 1; i++) {
-        var tmp = i * springFactor;
-        var before:any = new Number(Math.floor(tmp)).toFixed();
-        var after:any = new Number(Math.ceil(tmp)).toFixed();
-        var atPoint = tmp - before;
+    for ( let i = 1; i < fitCount - 1; i++) {
+        let tmp = i * springFactor;
+        let before:any = new Number(Math.floor(tmp)).toFixed();
+        let after:any = new Number(Math.ceil(tmp)).toFixed();
+        let atPoint = tmp - before;
         newData[i] = linearInterpolate(data[before], data[after], atPoint);
     }
     newData[fitCount - 1] = data[data.length - 1]; // for new allocation
@@ -52,8 +53,8 @@ function interpolateArray(data:any, fitCount:any):number[] {
 };
 
 function l2Normalize(arr:any):number[] {
-    var sum = arr.reduce((cum:any, value:any)=> { return cum + (value * value) }, 0);
-    var norm = Math.sqrt(sum);
+    let sum = arr.reduce((cum:any, value:any)=> { return cum + (value * value) }, 0);
+    let norm = Math.sqrt(sum);
     return arr.map((v:any)=>v/norm);
 }
 
@@ -63,9 +64,9 @@ export class PatternDetectorOutput {
     probability : number
 }
 
-var modelLoaded = false;
-var laodingModel = false;
-var loadingPromise;
+let modelLoaded = false;
+let laodingModel = false;
+let loadingPromise;
 
 async function loadModel() {
     if(modelLoaded) return Promise.resolve(true);
@@ -75,8 +76,8 @@ async function loadModel() {
         if(isNodeEnvironment) {
             tf = require('@tensorflow/tfjs')
             console.log('Nodejs Environment detected ');
-            var tfnode = require('@tensorflow/tfjs-node');
-            var modelPath = require('path').resolve(__dirname, '../tf_model/model.json');
+            let tfnode = require('@tensorflow/tfjs-node');
+            let modelPath = require('path').resolve(__dirname, '../tf_model/model.json');
             model = await tf.loadModel(tfnode.io.fileSystem(modelPath));
         } else {
             if(typeof (window as any).tf == "undefined") {
@@ -113,40 +114,40 @@ export async function predictPattern(input:PatternDetectorInput):Promise<Pattern
         console.warn('Pattern detector requires atleast 300 data points for a reliable prediction, received just ', input.values.length)
     }
     Indicator.reverseInputs(input);
-    var values = input.values;
-    var output = await model.predict(tf.tensor2d([l2Normalize(interpolateArray(values, 400))]));
-    var index = tf.argMax(output, 1).get(0);
+    let values = input.values;
+    let output = await model.predict(tf.tensor2d([l2Normalize(interpolateArray(values, 400))]));
+    let index = tf.argMax(output, 1).get(0);
     Indicator.reverseInputs(input);
     return { patternId : index, pattern : oneHotMap[index], probability : output.get(0,4) * 100}
 }
 
 export async function hasDoubleBottom(input:PatternDetectorInput):Promise<Boolean> {
-    var result = await predictPattern(input)
+    let result = await predictPattern(input)
     return (result.patternId === AvailablePatterns.DB)
 }
 
 export async function hasDoubleTop(input:PatternDetectorInput):Promise<Boolean> {
-    var result = await predictPattern(input)
+    let result = await predictPattern(input)
     return (result.patternId === AvailablePatterns.DT)
 }
 
 export async function hasHeadAndShoulder(input:PatternDetectorInput):Promise<Boolean> {
-    var result = await predictPattern(input)
+    let result = await predictPattern(input)
     return (result.patternId === AvailablePatterns.HS)
 }
 
 export async function hasInverseHeadAndShoulder(input:PatternDetectorInput):Promise<Boolean> {
-    var result = await predictPattern(input)
+    let result = await predictPattern(input)
     return (result.patternId === AvailablePatterns.IHS)
 }
 
 export async function isTrendingUp(input:PatternDetectorInput):Promise<Boolean> {
-    var result = await predictPattern(input)
+    let result = await predictPattern(input)
     return (result.patternId === AvailablePatterns.TU)
 }
 
 export async function isTrendingDown(input:PatternDetectorInput):Promise<Boolean> {
-    var result = await predictPattern(input)
+    let result = await predictPattern(input)
     return (result.patternId === AvailablePatterns.TD)
 }
 

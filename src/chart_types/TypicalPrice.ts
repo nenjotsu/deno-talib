@@ -30,7 +30,7 @@ export class TypicalPrice extends Indicator {
 
     this.generator.next();
     input.low.forEach((tick, index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high: input.high[index],
         low: input.low[index],
         close: input.close[index]
@@ -42,14 +42,14 @@ export class TypicalPrice extends Indicator {
   static calculate = typicalprice;
 
   nextValue(price: CandleData): number | undefined {
-    var result = this.generator.next(price).value;
+    let result = this.generator.next(price).value;
     return result;
   }
 }
 
 export function typicalprice(input: TypicalPriceInput): number[] {
   Indicator.reverseInputs(input);
-  var result = new TypicalPrice(input).result;
+  let result = new TypicalPrice(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

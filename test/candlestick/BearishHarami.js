@@ -1,9 +1,9 @@
-var BearishHarami = require('../../lib/candlestick/BearishHarami').default;
-var assert = require('assert');
-var drawCandleStick         = require('draw-candlestick');
-var fs                      = require('fs');
+let BearishHarami = require('../../lib/candlestick/BearishHarami').default;
+let assert = require('assert');
+let drawCandleStick         = require('draw-candlestick');
+let fs                      = require('fs');
 
-var input = {
+let input = {
   open: [20.12, 22,13],
   high: [23.82,22.76],
   close: [23.50,21.70],
@@ -12,12 +12,12 @@ var input = {
 
 describe('BearishHarami : ', function() {
    before(function() {
-    var imageBuffer = drawCandleStick(input);
+    let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BearishHarami.png',imageBuffer);
   });
   it('Check whether the supplied data has BearishHarami pattern', function() {
-   var bearishHarami = new BearishHarami ();
-   var result = bearishHarami.hasPattern(input);
+   let bearishHarami = new BearishHarami ();
+   let result = bearishHarami.hasPattern(input);
    assert.deepEqual(result, true, 'Invalid result for BearishHarami')
    
   });

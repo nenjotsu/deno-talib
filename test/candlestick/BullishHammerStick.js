@@ -1,9 +1,9 @@
-var BullishHammer   = require('../../lib/candlestick/BullishHammerStick').default;
-var assert          = require('assert');
-var drawCandleStick = require('draw-candlestick');
-var fs              = require('fs');
+let BullishHammer   = require('../../lib/candlestick/BullishHammerStick').default;
+let assert          = require('assert');
+let drawCandleStick = require('draw-candlestick');
+let fs              = require('fs');
 
-var basicHammer = {
+let basicHammer = {
   open: [26.13],
   high: [30.10],
   close: [30.10],
@@ -12,12 +12,12 @@ var basicHammer = {
 
 describe('Bullish Hammer (Single Stick): ', function() {
    before(function() {
-    var imageBuffer = drawCandleStick(basicHammer);
+    let imageBuffer = drawCandleStick(basicHammer);
     fs.writeFileSync(__dirname+'/images/BullishHammerStick.png',imageBuffer);
   });
   it('Check whether the supplied data has Bullish Hammer (Single Stick) pattern', function() {
-   var bullishHammer = new BullishHammer();
-   var result = bullishHammer.hasPattern(basicHammer);
+   let bullishHammer = new BullishHammer();
+   let result = bullishHammer.hasPattern(basicHammer);
    assert.deepEqual(result, true, 'Invalid result for Bullish Hammer (Single Stick)');
   });
 })

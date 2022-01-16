@@ -15,19 +15,19 @@ export class CrossOver extends Indicator {
   constructor(input: CrossInput) {
     super(input);
 
-    var crossUp = new CrossUp({ lineA: input.lineA, lineB: input.lineB });
-    var crossDown = new CrossDown({ lineA: input.lineA, lineB: input.lineB });
+    let crossUp = new CrossUp({ lineA: input.lineA, lineB: input.lineB });
+    let crossDown = new CrossDown({ lineA: input.lineA, lineB: input.lineB });
 
     const genFn = function* (): IterableIterator<true | false> {
       // @ts-ignore
-      var current = yield;
-      var result = false;
-      var first = true;
+      let current = yield;
+      let result = false;
+      let first = true;
       while (true) {
         // @ts-ignore
-        var nextUp = crossUp.nextValue(current.valueA, current.valueB);
+        let nextUp = crossUp.nextValue(current.valueA, current.valueB);
         // @ts-ignore
-        var nextDown = crossDown.nextValue(current.valueA, current.valueB);
+        let nextDown = crossDown.nextValue(current.valueA, current.valueB);
 
         result = nextUp || nextDown;
 
@@ -40,9 +40,9 @@ export class CrossOver extends Indicator {
     this.generator = genFn();
     this.generator.next();
 
-    var resultA = crossUp.getResult();
+    let resultA = crossUp.getResult();
     // @ts-ignore
-    var resultB = crossDown.getResult();
+    let resultB = crossDown.getResult();
     // @ts-ignore
     this.result = resultA.map((a, index) => {
       if (index === 0) return false;
@@ -70,7 +70,7 @@ export class CrossOver extends Indicator {
 
 export function crossOver(input: CrossInput): boolean[] {
   Indicator.reverseInputs(input);
-  var result = new CrossOver(input).result;
+  let result = new CrossOver(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

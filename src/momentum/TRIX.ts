@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Created by AAravindan on 5/9/16.
  */
@@ -60,7 +61,7 @@ export class TRIX extends Indicator {
 
 export function trix(input:TRIXInput):number[] {
     Indicator.reverseInputs(input);
-    var result = new TRIX(input).result;
+    let result = new TRIX(input).result;
     if(input.reversedInput) {
         result.reverse();
     }

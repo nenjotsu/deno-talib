@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 /**
  * Created by AAravindan on 5/8/16.
@@ -14,18 +15,18 @@ export class MDM extends Indicator {
   generator:IterableIterator<number | undefined>;
   constructor(input:MDMInput) {
     super(input);
-    var lows = input.low
-    var highs = input.high;
-    var format = this.format;
+    let lows = input.low
+    let highs = input.high;
+    let format = this.format;
 
     if(lows.length != highs.length) {
       throw ('Inputs(low,high) not of equal size');
     }
     this.result = [];
     this.generator = (function* (){
-      var minusDm;
-      var current = yield;
-      var last;
+      let minusDm;
+      let current = yield;
+      let last;
       while (true) {
         if(last){
           let upMove = (current.high  - last.high)
@@ -40,7 +41,7 @@ export class MDM extends Indicator {
     this.generator.next();
 
     lows.forEach((tick, index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high : highs[index],
         low  : lows[index]
       });
@@ -51,7 +52,7 @@ export class MDM extends Indicator {
 
   static calculate(input:MDMInput):number[] {
        Indicator.reverseInputs(input);
-        var result = new MDM(input).result;
+        let result = new MDM(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

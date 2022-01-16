@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { IndicatorInput, Indicator } from '../indicator/indicator.ts';
 
 "use strict"
@@ -49,7 +50,7 @@ export class PSAR extends Indicator {
     let highs = input.high || [];
     let lows = input.low || [];
 
-    var genFn = function* (step:number, max:number):IterableIterator<number | undefined> {
+    let genFn = function* (step:number, max:number):IterableIterator<number | undefined> {
       let curr, extreme, sar, furthest;
 
       let up = true;
@@ -98,7 +99,7 @@ export class PSAR extends Indicator {
     this.generator.next();
 
     lows.forEach((tick, index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high: highs[index],
         low: lows[index],
       });
@@ -119,7 +120,7 @@ export class PSAR extends Indicator {
 
 export function psar(input:PSARInput):number[] {
         Indicator.reverseInputs(input);
-        var result = new PSAR(input).result;
+        let result = new PSAR(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

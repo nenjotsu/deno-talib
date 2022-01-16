@@ -2,11 +2,11 @@
  * Created by AAravindan on 5/7/16.
  */
 "use strict";
-var FixedSizeLinkedList = require("../../lib/Utils/FixedSizeLinkedList").default;
-var assert = require('assert');
+let FixedSizeLinkedList = require("../../lib/Utils/FixedSizeLinkedList").default;
+let assert = require('assert');
 
-var linkedList;
-var size = 10;
+let linkedList;
+let size = 10;
 
 describe('Fixed Size Linked List', function() {
   beforeEach(function() {
@@ -55,7 +55,7 @@ describe('Fixed Size Linked List', function() {
       linkedList.push(i.toString())
     }
     assert(linkedList.iterator, 'Iterator not found');
-    var results = [];
+    let results = [];
     for(let values of linkedList.iterator()){
       results.push(values);
     }

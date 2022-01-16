@@ -1,67 +1,65 @@
-import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
-import { MAInput, SMA } from './SMA.ts';
-import { LinkedList } from '../Utils/LinkedList.ts';
+import { Indicator } from "../indicator/indicator.ts";
+import { MAInput, SMA } from "./SMA.ts";
 
-export class EMA extends Indicator{
-    period:number;
-    price:number[];
-    result : number[];
-    generator:IterableIterator<number | undefined>;
-    constructor(input:MAInput) {
-        super(input);
-        var period = input.period
-        var priceArray = input.values;
-        var exponent = (2 / (period + 1));
-        var sma:SMA;
+export class EMA extends Indicator {
+  period!: number;
+  price!: number[];
+  result: number[];
+  generator: IterableIterator<number | undefined>;
+  constructor(input: MAInput) {
+    super(input);
+    const period = input.period;
+    const priceArray = input.values;
+    const exponent = 2 / (period + 1);
 
-        this.result = [];
+    this.result = [];
+    const sma = new SMA({ period: period, values: [] });
 
-        sma = new SMA({period : period, values :[]});
-
-        var genFn = (function* ():IterableIterator<number | undefined>{
-            var tick  = yield;
-            var prevEma;
-            while (true) {
-                if(prevEma !== undefined && tick !== undefined){
-                    prevEma = ((tick - prevEma) * exponent) + prevEma;
-                    tick = yield prevEma;
-                }else {
-                    tick = yield;
-                    prevEma = sma.nextValue(tick)
-                    if(prevEma)
-                        tick = yield prevEma;
-                }
-            }
-        });
-
-        this.generator = genFn();
-
-        this.generator.next();
-        this.generator.next();
-
-        priceArray.forEach((tick) => {
-            var result = this.generator.next(tick);
-            if(result.value != undefined){
-                this.result.push(this.format(result.value));
-            }
-        });
-    }
-
-    static calculate = ema;
-
-    nextValue(price:number) {
-        var result = this.generator.next(price).value;
-        if(result != undefined)
-            return this.format(result);
+    const genFn = function* (): IterableIterator<number | undefined> {
+      let tick:number|undefined = yield;
+      let prevEma;
+      while (true) {
+        if (prevEma !== undefined && tick !== undefined) {
+          prevEma = (tick - prevEma) * exponent + prevEma;
+          tick = yield prevEma;
+        } else {
+          tick = yield;
+          // @ts-ignore
+          prevEma = sma.nextValue(tick);
+          if (prevEma) tick = yield prevEma;
+        }
+      }
     };
+
+    this.generator = genFn();
+
+    this.generator.next();
+    this.generator.next();
+
+    priceArray.forEach(tick => {
+      // @ts-ignore
+      const result = this.generator.next(tick);
+      if (result.value != undefined) {
+        this.result.push(this.format(result.value));
+      }
+    });
+  }
+
+  static calculate = ema;
+
+  nextValue(price: number) {
+    // @ts-ignore
+    const result = this.generator.next(price).value;
+    if (result != undefined) return this.format(result);
+  }
 }
 
-export function ema(input:MAInput):number[] {
-        Indicator.reverseInputs(input);
-        var result = new EMA(input).result;
-        if(input.reversedInput) {
-            result.reverse();
-        }
-        Indicator.reverseInputs(input);
-        return result;
-    }
+export function ema(input: MAInput): number[] {
+  Indicator.reverseInputs(input);
+  const result = new EMA(input).result;
+  if (input.reversedInput) {
+    result.reverse();
+  }
+  Indicator.reverseInputs(input);
+  return result;
+}

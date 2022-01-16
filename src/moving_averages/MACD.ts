@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Created by AAravindan on 5/4/16.
  */
@@ -27,18 +28,18 @@ export class MACD extends Indicator{
     generator:IterableIterator<MACDOutput | undefined>;
     constructor(input:MACDInput) {
       super(input);
-      var oscillatorMAtype = input.SimpleMAOscillator ? SMA : EMA;
-      var signalMAtype   = input.SimpleMASignal ? SMA : EMA;
-      var fastMAProducer = new oscillatorMAtype({period : input.fastPeriod, values : [], format : (v) => {return v}});
-      var slowMAProducer = new oscillatorMAtype({period : input.slowPeriod, values : [], format : (v) => {return v}});
-      var signalMAProducer = new signalMAtype({period : input.signalPeriod, values : [], format : (v) => {return v}});
-      var format = this.format;
+      let oscillatorMAtype = input.SimpleMAOscillator ? SMA : EMA;
+      let signalMAtype   = input.SimpleMASignal ? SMA : EMA;
+      let fastMAProducer = new oscillatorMAtype({period : input.fastPeriod, values : [], format : (v) => {return v}});
+      let slowMAProducer = new oscillatorMAtype({period : input.slowPeriod, values : [], format : (v) => {return v}});
+      let signalMAProducer = new signalMAtype({period : input.signalPeriod, values : [], format : (v) => {return v}});
+      let format = this.format;
       this.result = [];
 
       this.generator = (function* (){
-        var index = 0;
-        var tick;
-        var MACD:number|undefined, signal:number|undefined, histogram:number|undefined, fast:number|undefined, slow:number|undefined;
+        let index = 0;
+        let tick;
+        let MACD:number|undefined, signal:number|undefined, histogram:number|undefined, fast:number|undefined, slow:number|undefined;
         while (true) {
           if(index < input.slowPeriod){
             tick = yield;
@@ -67,7 +68,7 @@ export class MACD extends Indicator{
       this.generator.next();
 
       input.values.forEach((tick) => {
-        var result = this.generator.next(tick);
+        let result = this.generator.next(tick);
         if(result.value != undefined){
           this.result.push(result.value);
         }
@@ -77,14 +78,14 @@ export class MACD extends Indicator{
     static calculate=macd;
 
     nextValue(price:number):MACDOutput | undefined {
-        var result = this.generator.next(price).value;
+        let result = this.generator.next(price).value;
         return result;
     };
 }
 
 export function macd(input:MACDInput):MACDOutput[] {
        Indicator.reverseInputs(input);
-        var result = new MACD(input).result;
+        let result = new MACD(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

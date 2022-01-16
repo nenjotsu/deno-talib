@@ -1,11 +1,11 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-var WilderSmoothing = require('../../lib/moving_averages/WilderSmoothing').WilderSmoothing;
-var assert = require('assert');
-var data   = require('../data');
+let WilderSmoothing = require('../../lib/moving_averages/WilderSmoothing').WilderSmoothing;
+let assert = require('assert');
+let data   = require('../data');
 
-var prices = [
+let prices = [
 0.959399999999999,
 0.4847,
 1.3553,
@@ -26,7 +26,7 @@ var prices = [
 1.6322,
 0.722000000000001
 ];
-var expectedResult = [
+let expectedResult = [
   13.333000000000002,
       13.280742857142862,
       13.420318367346944,
@@ -34,7 +34,7 @@ var expectedResult = [
       14.287536755518538,
       13.988998415838644,
 ];
-var period = 14;
+let period = 14;
 
 describe('WilderSmoothing (Wilder smoothing)', function() {
   it('should calculate WilderSmoothing using the calculate method', function() {
@@ -45,7 +45,7 @@ describe('WilderSmoothing (Wilder smoothing)', function() {
   });
 
   it('should be able to get WilderSmoothing for the next bar', function() {
-    var wilderSmoothing = new WilderSmoothing({
+    let wilderSmoothing = new WilderSmoothing({
       period : period,
       values : prices
     });
@@ -53,13 +53,13 @@ describe('WilderSmoothing (Wilder smoothing)', function() {
   })
 
   it('should be able to get WilderSmoothing for the next bar using nextValue', function() {
-    var wilderSmoothing = new WilderSmoothing({
+    let wilderSmoothing = new WilderSmoothing({
       period : period,
       values : []
     });
-    var results = [];
+    let results = [];
     prices.forEach(price => {
-      var result = wilderSmoothing.nextValue(price);
+      let result = wilderSmoothing.nextValue(price);
       if(result)
         results.push(result)
     });

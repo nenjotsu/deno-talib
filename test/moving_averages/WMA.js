@@ -1,12 +1,12 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-var WMA = require('../../lib/moving_averages/WMA').WMA;
-var assert = require('assert');
-var data   = require('../data');
+let WMA = require('../../lib/moving_averages/WMA').WMA;
+let assert = require('assert');
+let data   = require('../data');
 
-var prices = data.close;
-var expectedResult = [
+let prices = data.close;
+let expectedResult = [
   140.32866666666666,
       142.52022222222223,
       146.86288888888888,
@@ -18,7 +18,7 @@ var expectedResult = [
       226.68177777777777,
       242.2168888888889,
 ];
-var period = 9;
+let period = 9;
 
 describe('WMA (Weighted Moving Average)', function() {
   it('should calculate WMA using the calculate method', function() {
@@ -29,7 +29,7 @@ describe('WMA (Weighted Moving Average)', function() {
   });
 
   it('should be able to get WMA for the next bar', function() {
-    var wma = new WMA({
+    let wma = new WMA({
       period : period,
       values : prices
     });
@@ -37,13 +37,13 @@ describe('WMA (Weighted Moving Average)', function() {
   })
 
   it('should be able to get WMA for the next bar using nextValue', function() {
-    var wma = new WMA({
+    let wma = new WMA({
       period : period,
       values : []
     });
-    var results = [];
+    let results = [];
     prices.forEach(price => {
-      var result = wma.nextValue(price);
+      let result = wma.nextValue(price);
       if(result)
         results.push(result)
     });

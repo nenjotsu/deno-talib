@@ -19,14 +19,14 @@ export class SMA extends Indicator {
     super(input);
     this.period = input.period;
     this.price = input.values;
-    var genFn = function* (
+    let genFn = function* (
       period: number
     ): IterableIterator<number | undefined> {
-      var list = new LinkedList();
-      var sum = 0;
-      var counter = 1;
-      var current = yield;
-      var result;
+      let list = new LinkedList();
+      let sum = 0;
+      let counter = 1;
+      let current = yield;
+      let result;
       list.push(0);
       while (true) {
         if (counter < period) {
@@ -48,7 +48,7 @@ export class SMA extends Indicator {
     this.result = [];
     this.price.forEach(tick => {
       // @ts-ignore
-      var result = this.generator.next(tick);
+      let result = this.generator.next(tick);
       if (result.value !== undefined) {
         this.result.push(this.format(result.value));
       }
@@ -59,14 +59,14 @@ export class SMA extends Indicator {
 
   nextValue(price: number): number | undefined {
     // @ts-ignore
-    var result = this.generator.next(price).value;
+    let result = this.generator.next(price).value;
     if (result != undefined) return this.format(result);
   }
 }
 
 export function sma(input: MAInput): number[] {
   Indicator.reverseInputs(input);
-  var result = new SMA(input).result;
+  let result = new SMA(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

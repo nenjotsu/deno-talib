@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import LinkedList from '../Utils/FixedSizeLinkedList.ts';
 
@@ -12,14 +13,14 @@ export class ROC extends Indicator {
   generator:IterableIterator<number | undefined>;
   constructor(input:ROCInput) {
       super(input);
-      var period = input.period
-      var priceArray = input.values;
+      let period = input.period
+      let priceArray = input.values;
       this.result = [];
       this.generator = (function* (){
         let index = 1;
-        var pastPeriods = new LinkedList(period);;
-        var tick = yield;
-        var roc;
+        let pastPeriods = new LinkedList(period);;
+        let tick = yield;
+        let roc;
         while (true) {
           pastPeriods.push(tick)
           if(index < period){
@@ -34,7 +35,7 @@ export class ROC extends Indicator {
       this.generator.next();
 
       priceArray.forEach((tick) => {
-        var result = this.generator.next(tick);
+        let result = this.generator.next(tick);
         if(result.value != undefined && (!isNaN(result.value))){
           this.result.push(this.format(result.value));
         }
@@ -44,7 +45,7 @@ export class ROC extends Indicator {
    static calculate = roc;
 
     nextValue(price:number):number | undefined {
-        var nextResult = this.generator.next(price);
+        let nextResult = this.generator.next(price);
         if(nextResult.value != undefined && (!isNaN(nextResult.value))) {
           return this.format(nextResult.value);
         }
@@ -55,7 +56,7 @@ export class ROC extends Indicator {
 
 export function roc(input:ROCInput):number[] {
        Indicator.reverseInputs(input);
-        var result = new ROC(input).result;
+        let result = new ROC(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

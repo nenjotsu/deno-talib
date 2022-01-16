@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { IndicatorInput, Indicator } from '../indicator/indicator.ts';
 
 import LinkedList from '../Utils/FixedSizeLinkedList.ts';
@@ -35,7 +36,7 @@ export class WilliamsR extends Indicator {
       let pastLowPeriods = new LinkedList(period, false, true);
       let periodLow;
       let periodHigh;
-      var tick = yield;
+      let tick = yield;
       let williamsR;
       while (true) {
         pastHighPeriods.push(tick.high);
@@ -55,7 +56,7 @@ export class WilliamsR extends Indicator {
     this.generator.next();
 
     lows.forEach((low, index) => {
-      var result = this.generator.next({
+      let result = this.generator.next({
         high : highs[index],
         low  : lows[index],
         close : closes[index]
@@ -69,7 +70,7 @@ export class WilliamsR extends Indicator {
   static calculate = williamsr;
 
   nextValue(price:number):number | undefined {
-      var nextResult = this.generator.next(price);
+      let nextResult = this.generator.next(price);
       if(nextResult.value != undefined)
         return this.format(nextResult.value);
   };
@@ -77,7 +78,7 @@ export class WilliamsR extends Indicator {
 
 export function williamsr(input:WilliamsRInput):number[] {
       Indicator.reverseInputs(input);
-      var result = new WilliamsR(input).result;
+      let result = new WilliamsR(input).result;
       if(input.reversedInput) {
           result.reverse();
       }

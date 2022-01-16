@@ -1,9 +1,9 @@
-var MorningDojiStar = require('../../lib/candlestick/MorningDojiStar').default;
-var assert = require('assert');
-var drawCandleStick         = require('draw-candlestick');
-var fs                      = require('fs');
+let MorningDojiStar = require('../../lib/candlestick/MorningDojiStar').default;
+let assert = require('assert');
+let drawCandleStick         = require('draw-candlestick');
+let fs                      = require('fs');
 
-var input = {
+let input = {
   open: [22.20,20.30,20.70],
   high: [22.50,20.45,21.82],
   close: [20.80,20.30,21.58],
@@ -12,12 +12,12 @@ var input = {
 
 describe('MorningDojiStar : ', function() {
   before(function() {
-    var imageBuffer = drawCandleStick(input);
+    let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/MorningDojiStar.png',imageBuffer);
   });
   it('Check whether the supplied data has MorningDojiStar pattern', function() {
-   var morningDojiStar = new MorningDojiStar ();
-   var result      = morningDojiStar.hasPattern(input);
+   let morningDojiStar = new MorningDojiStar ();
+   let result      = morningDojiStar.hasPattern(input);
    assert.deepEqual(result, true, 'Invalid result for MorningDojiStar');
   });
 })

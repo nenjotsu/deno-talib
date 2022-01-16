@@ -1,11 +1,11 @@
 // /**
 //  * Created by AAravindan on 5/3/16.
 //  */
-// var WEMA = require('../../lib/moving_averages/WEMA').WEMA;
-// var assert = require('assert');
-// var data   = require('../data');
+// let WEMA = require('../../lib/moving_averages/WEMA').WEMA;
+// let assert = require('assert');
+// let data   = require('../data');
 
-// var prices = [
+// let prices = [
 // 0.959399999999999,
 // 0.4847,
 // 1.3553,
@@ -26,7 +26,7 @@
 // 1.6322,
 // 0.722000000000001
 // ];
-// var expectedResult = [
+// let expectedResult = [
 //   13.33,
 //   13.28,
 //   13.42,
@@ -34,7 +34,7 @@
 //   14.29,
 //   13.99
 // ];
-// var period = 9;
+// let period = 9;
 
 // describe('WEMA (Weighted Moving Average)', function() {
 //   it('should calculate WEMA using the calculate method', function() {
@@ -45,7 +45,7 @@
 //   });
 
 //   it('should be able to get WEMA for the next bar', function() {
-//     var WEMA = new WEMA({
+//     let WEMA = new WEMA({
 //       period : period,
 //       values : prices
 //     });
@@ -53,13 +53,13 @@
 //   })
 
 //   it('should be able to get WEMA for the next bar using nextValue', function() {
-//     var WEMA = new WEMA({
+//     let WEMA = new WEMA({
 //       period : period,
 //       values : []
 //     });
-//     var results = [];
+//     let results = [];
 //     prices.forEach(price => {
-//       var result = WEMA.nextValue(price);
+//       let result = WEMA.nextValue(price);
 //       if(result)
 //         results.push(result)
 //     });

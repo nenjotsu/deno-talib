@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { MAInput } from './SMA.ts';
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { LinkedList } from '../Utils/LinkedList.ts';
@@ -12,12 +13,12 @@ export class WilderSmoothing extends Indicator{
         super(input);
         this.period  = input.period;
         this.price = input.values;
-        var genFn = (function*(period:number):IterableIterator<number | undefined> {
-            var list = new LinkedList();
-            var sum = 0;
-            var counter = 1;
-            var current = yield;
-            var result = 0;
+        let genFn = (function*(period:number):IterableIterator<number | undefined> {
+            let list = new LinkedList();
+            let sum = 0;
+            let counter = 1;
+            let current = yield;
+            let result = 0;
             while(true){
                 if(counter < period){
                     counter ++;
@@ -38,7 +39,7 @@ export class WilderSmoothing extends Indicator{
         this.generator.next();
         this.result = [];
         this.price.forEach((tick) => {
-            var result = this.generator.next(tick);
+            let result = this.generator.next(tick);
             if(result.value != undefined){
                 this.result.push(this.format(result.value));
             }
@@ -48,7 +49,7 @@ export class WilderSmoothing extends Indicator{
     static calculate = wildersmoothing;
 
     nextValue(price:number):number | undefined {
-        var result = this.generator.next(price).value;
+        let result = this.generator.next(price).value;
         if(result != undefined)
             return this.format(result);
     };
@@ -56,7 +57,7 @@ export class WilderSmoothing extends Indicator{
 
 export function wildersmoothing(input:MAInput):number[] {
     Indicator.reverseInputs(input);
-    var result = new WilderSmoothing(input).result;
+    let result = new WilderSmoothing(input).result;
     if(input.reversedInput) {
         result.reverse();
     }

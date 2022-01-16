@@ -1,9 +1,9 @@
-var HangingMan      = require('../../lib/candlestick/HangingMan').default;
-var assert          = require('assert');
-var drawCandleStick = require('draw-candlestick');
-var fs              = require('fs');
+let HangingMan      = require('../../lib/candlestick/HangingMan').default;
+let assert          = require('assert');
+let drawCandleStick = require('draw-candlestick');
+let fs              = require('fs');
 
-var hangingManData = [
+let hangingManData = [
   {
     name: 'Bearish',
     data: {
@@ -27,14 +27,14 @@ var hangingManData = [
 describe('Hanging Man : ', function() {
    before(function() {
     hangingManData.forEach((patternSet) => {
-      var imageBuffer = drawCandleStick(patternSet.data);
+      let imageBuffer = drawCandleStick(patternSet.data);
       fs.writeFileSync(`${__dirname}/images/${patternSet.name.replace(' ', '')}HangingMan.png`,imageBuffer);
     });
   });
   hangingManData.forEach((patternSet) => {
     it(`Check whether the supplied data has Hanging Man: ${patternSet.name}`, function() {
-      var hangingMan = new HangingMan();
-      var result = hangingMan.hasPattern(patternSet.data);
+      let hangingMan = new HangingMan();
+      let result = hangingMan.hasPattern(patternSet.data);
       assert.deepEqual(result, true, `Invalid result for Hanging Man: ${patternSet.name}`);
      });
   });

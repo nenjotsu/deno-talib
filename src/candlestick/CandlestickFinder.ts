@@ -1,3 +1,4 @@
+// @ts-nocheck
 import StockData from '../StockData.ts';
 export default class CandlestickFinder {
     requiredCount:number

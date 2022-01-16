@@ -17,10 +17,10 @@ export class SD extends Indicator {
   generator: IterableIterator<number | undefined>;
   constructor(input: SDInput) {
     super(input);
-    var period = input.period;
-    var priceArray = input.values;
+    let period = input.period;
+    let priceArray = input.values;
 
-    var sma = new SMA({
+    let sma = new SMA({
       period: period,
       values: [],
       format: (v: number) => {
@@ -31,12 +31,12 @@ export class SD extends Indicator {
     this.result = [];
 
     this.generator = (function* () {
-      var tick;
-      var mean;
-      var currentSet = new LinkedList(period);
+      let tick;
+      let mean;
+      let currentSet = new LinkedList(period);
       // @ts-ignore
       tick = yield;
-      var sd;
+      let sd;
       while (true) {
         currentSet.push(tick);
         mean = sma.nextValue(tick);
@@ -56,7 +56,7 @@ export class SD extends Indicator {
 
     priceArray.forEach(tick => {
       // @ts-ignore
-      var result = this.generator.next(tick);
+      let result = this.generator.next(tick);
       if (result.value != undefined) {
         this.result.push(this.format(result.value));
       }
@@ -67,14 +67,14 @@ export class SD extends Indicator {
 
   nextValue(price: number): number | undefined {
     // @ts-ignore
-    var nextResult = this.generator.next(price);
+    let nextResult = this.generator.next(price);
     if (nextResult.value != undefined) return this.format(nextResult.value);
   }
 }
 
 export function sd(input: SDInput): number[] {
   Indicator.reverseInputs(input);
-  var result = new SD(input).result;
+  let result = new SD(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

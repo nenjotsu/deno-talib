@@ -1,11 +1,11 @@
 /**
 * Created by AAravindan on 5/5/16.
 */
-var AverageLoss = require('../../lib/Utils/AverageLoss').AverageLoss;
-var assert = require("assert");
-var data = require('../data');
+let AverageLoss = require('../../lib/Utils/AverageLoss').AverageLoss;
+let assert = require("assert");
+let data = require('../data');
 
-var input = {
+let input = {
  period : 6,
  values : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 }

@@ -1,15 +1,15 @@
 /**
  * Created by cwouter on 1/3/2020.
  */
-var CrossUp = require('../../lib/Utils/CrossUp').CrossUp;
-var assert = require('assert');
+let CrossUp = require('../../lib/Utils/CrossUp').CrossUp;
+let assert = require('assert');
 
-var input = {
+let input = {
     lineA: [3, 4, 5, 6, 7, 2, 7, 5, 7, 2, 5, 5, 7, 2, 5, 5, 2, 7],
     lineB: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
 };
 
-var expectedResults = [false, false, false, true, false, false, true, false, false, false, false, false, true, false, false, false, false, true];
+let expectedResults = [false, false, false, true, false, false, true, false, false, false, false, false, true, false, false, false, false, true];
 
 describe('Cross Up', function() {
     'use strict';
@@ -18,15 +18,15 @@ describe('Cross Up', function() {
     });
 
     it('should calculate positive line cross over by using getResult', function() {
-        var crossUp = new CrossUp(input);
+        let crossUp = new CrossUp(input);
         assert.deepEqual(crossUp.getResult(), expectedResults, 'Wrong Results while calculating next bar');
     });
 
     it('should calculate positive line cross over by using nextValue', function() {
-        var crossUp = new CrossUp({lineA: [], lineB: []});
-        var results = [];
+        let crossUp = new CrossUp({lineA: [], lineB: []});
+        let results = [];
         input.lineA.forEach((value, index) => {
-            var result = crossUp.nextValue(input.lineA[index], input.lineB[index]);
+            let result = crossUp.nextValue(input.lineA[index], input.lineB[index]);
             results.push(result)
         });
         assert.deepEqual(results, expectedResults, 'Wrong Results while getting results');

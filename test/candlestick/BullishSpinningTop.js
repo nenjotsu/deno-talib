@@ -1,9 +1,9 @@
-var BullishSpinningTop = require('../../lib/candlestick/BullishSpinningTop').default;
-var assert = require('assert');
-var drawCandleStick         = require('draw-candlestick');
-var fs                      = require('fs');
+let BullishSpinningTop = require('../../lib/candlestick/BullishSpinningTop').default;
+let assert = require('assert');
+let drawCandleStick         = require('draw-candlestick');
+let fs                      = require('fs');
 
-var input = {
+let input = {
   open: [20.50],
   high: [20.87],
   close: [20.62],
@@ -13,12 +13,12 @@ var input = {
 
 describe('BullishSpinningTop : ', function() {
    before(function() {
-    var imageBuffer = drawCandleStick(input);
+    let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BullishSpinningTop.png',imageBuffer);
   });
   it('Check whether the supplied data has BullishSpinningTop pattern', function() {
-   var bullishSpinningTop = new BullishSpinningTop ();
-   var result = bullishSpinningTop.hasPattern(input);
+   let bullishSpinningTop = new BullishSpinningTop ();
+   let result = bullishSpinningTop.hasPattern(input);
    assert.deepEqual(result, true, 'Invalid result for BullishSpinningTop')
    
   });

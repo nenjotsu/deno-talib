@@ -5,11 +5,11 @@
 const assert = require('assert');
 const SD     = require('../../lib/Utils/SD').SD
 
-//var data = [4,2,5,8,6];
-var data = [11,12,13,14,15,16,18, 19, 22, 23, 23];
-var period = 5;
-//var expectResult = [2.24]
-var expectResult = [
+//let data = [4,2,5,8,6];
+let data = [11,12,13,14,15,16,18, 19, 22, 23, 23];
+let period = 5;
+//let expectResult = [2.24]
+let expectResult = [
       1.4142135623730951,
       1.4142135623730951,
       1.7204650534085253,
@@ -25,15 +25,15 @@ describe('Standard Deviation', function() {
   });
 
   it('should be able to calculate EMA by using getResult', function() {
-    var sd = new SD({period : period, values : data});
+    let sd = new SD({period : period, values : data});
     assert.deepEqual(sd.getResult(),  expectResult, 'Wrong Results while calculating next bar');
   });
 
   it('should be able to get EMA for the next bar using nextValue', function() {
-    var sd = new SD({period : period, values : []});
-    var results = [];
+    let sd = new SD({period : period, values : []});
+    let results = [];
     data.forEach(price => {
-      var result = sd.nextValue(price);
+      let result = sd.nextValue(price);
       if(result)
         results.push(result)
     });

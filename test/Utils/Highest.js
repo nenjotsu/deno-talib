@@ -12,7 +12,7 @@ let expectResult = [30, 40, 40, 40, 30, 20, 20, 29, 29]
 
 describe('Highest', function() {
   it('should calculate Highest using the calculate method', function() {
-    var result = Highest.calculate(input);
+    let result = Highest.calculate(input);
     assert.deepEqual(result, expectResult, 'Wrong Results');
   });
 })

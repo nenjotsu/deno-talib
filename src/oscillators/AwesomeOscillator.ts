@@ -15,22 +15,22 @@ export class AwesomeOscillator extends Indicator {
   generator: IterableIterator<number | undefined>;
   constructor(input: AwesomeOscillatorInput) {
     super(input);
-    var highs = input.high;
-    var lows = input.low;
-    var fastPeriod = input.fastPeriod;
-    var slowPeriod = input.slowPeriod;
+    let highs = input.high;
+    let lows = input.low;
+    let fastPeriod = input.fastPeriod;
+    let slowPeriod = input.slowPeriod;
 
-    var slowSMA = new SMA({ values: [], period: slowPeriod });
-    var fastSMA = new SMA({ values: [], period: fastPeriod });
+    let slowSMA = new SMA({ values: [], period: slowPeriod });
+    let fastSMA = new SMA({ values: [], period: fastPeriod });
 
     this.result = [];
 
     this.generator = (function* () {
-      var result;
-      var tick;
-      var medianPrice;
-      var slowSmaValue;
-      var fastSmaValue;
+      let result;
+      let tick;
+      let medianPrice;
+      let slowSmaValue;
+      let fastSmaValue;
       // @ts-ignore
       tick = yield;
       while (true) {
@@ -48,11 +48,11 @@ export class AwesomeOscillator extends Indicator {
     this.generator.next();
 
     highs.forEach((tickHigh, index) => {
-      var tickInput:any = {
+      let tickInput:any = {
         high: tickHigh,
         low: lows[index]
       };
-      var result = this.generator.next(tickInput);
+      let result = this.generator.next(tickInput);
       if (result.value != undefined) {
         this.result.push(this.format(result.value));
       }
@@ -63,7 +63,7 @@ export class AwesomeOscillator extends Indicator {
 
   nextValue(price: CandleData): number | undefined {
     // @ts-ignore
-    var result = this.generator.next(price);
+    let result = this.generator.next(price);
     if (result.value != undefined) {
       return this.format(result.value);
     }
@@ -72,7 +72,7 @@ export class AwesomeOscillator extends Indicator {
 
 export function awesomeoscillator(input: AwesomeOscillatorInput): number[] {
   Indicator.reverseInputs(input);
-  var result = new AwesomeOscillator(input).result;
+  let result = new AwesomeOscillator(input).result;
   if (input.reversedInput) {
     result.reverse();
   }

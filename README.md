@@ -166,8 +166,8 @@ Every indicator has a static method `calculate` which can be used to calculate t
 
 ``` javascript
 import { SMA } from 'https://deno.land/x/talib/index.ts';
-var prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
-var period = 10;
+let prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
+let period = 10;
 sma({period : period, values : prices})
 ```
 
@@ -175,8 +175,8 @@ or
 
 ``` javascript
 import { SMA } from 'https://deno.land/x/talib/index.ts';
-var prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
-var period = 10;
+let prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
+let period = 10;
 SMA.calculate({period : period, values : prices})
 ```
 
@@ -185,10 +185,10 @@ SMA.calculate({period : period, values : prices})
 `nextValue` method is used to get the next indicator value.
 
 ``` javascript
-var sma = new SMA({period : period, values : []});
-var results = [];
+let sma = new SMA({period : period, values : []});
+let results = [];
 prices.forEach(price => {
-  var result = sma.nextValue(price);
+  let result = sma.nextValue(price);
   if(result)
     results.push(result)
 });
@@ -205,7 +205,7 @@ This a merge of calculate and nextValue. The usual use case would be
 1. Use nextValue to get next indicator values for further tick.
 
     ``` javascript
-    var sma = new SMA({period : period, values : prices});
+    let sma = new SMA({period : period, values : prices});
     sma.getResult(); // [5.5, 6.6, 7.7, 8.9]
     sma.nextValue(16); // 10.1
     ```

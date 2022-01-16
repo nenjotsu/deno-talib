@@ -26,12 +26,12 @@ export class BollingerBands extends Indicator {
     generator:IterableIterator<BollingerBandsOutput | undefined>;
     constructor(input:BollingerBandsInput) {
         super(input);
-        var period = input.period
-        var priceArray = input.values;
-        var stdDev     = input.stdDev;
-        var format     = this.format;
+        let period = input.period
+        let priceArray = input.values;
+        let stdDev     = input.stdDev;
+        let format     = this.format;
 
-        var sma,sd;
+        let sma,sd;
 
         this.result = [];
 
@@ -39,10 +39,10 @@ export class BollingerBands extends Indicator {
         sd  = new SD({period : period, values : [], format : (v) => {return v}});
 
         this.generator = (function* (){
-            var result;
-            var tick;
-            var calcSMA;
-            var calcsd;
+            let result;
+            let tick;
+            let calcSMA;
+            let calcsd;
             // @ts-ignore
             tick = yield;
             while (true) {
@@ -71,7 +71,7 @@ export class BollingerBands extends Indicator {
 
         priceArray.forEach((tick) => {
           // @ts-ignore
-            var result = this.generator.next(tick);
+            let result = this.generator.next(tick);
             if(result.value != undefined){
                 this.result.push(result.value);
             }
@@ -88,7 +88,7 @@ export class BollingerBands extends Indicator {
 
 export function bollingerbands(input:BollingerBandsInput):BollingerBandsOutput[] {
        Indicator.reverseInputs(input);
-        var result = new BollingerBands(input).result;
+        let result = new BollingerBands(input).result;
         if(input.reversedInput) {
             result.reverse();
         }

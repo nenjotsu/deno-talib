@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import FixedSizedLinkedList from './FixedSizeLinkedList.ts';
 import { CandleData } from '../StockData.ts';
@@ -12,17 +12,17 @@ export class Sum extends Indicator {
   generator:IterableIterator<number | undefined>;
     constructor (input:SumInput) {
       super(input);
-      var values     = input.values;
-      var period     = input.period;
+      let values     = input.values;
+      let period     = input.period;
 
       this.result = [];
 
-      var periodList = new FixedSizedLinkedList(period, false, false, true);
+      let periodList = new FixedSizedLinkedList(period, false, false, true);
 
       this.generator = (function* (){
-        var result;
-        var tick;
-        var high;
+        let result;
+        let tick;
+        let high;
         tick = yield;
         while (true)
         {
@@ -37,7 +37,7 @@ export class Sum extends Indicator {
       this.generator.next();
 
       values.forEach((value, index) => {
-        var result = this.generator.next(value);
+        let result = this.generator.next(value);
         if(result.value != undefined) {
           this.result.push(result.value);
         }
@@ -47,7 +47,7 @@ export class Sum extends Indicator {
   static calculate = sum;
 
   nextValue(price:number):number | undefined {
-     var result =  this.generator.next(price);
+     let result =  this.generator.next(price);
      if(result.value != undefined){
         return result.value;
       }
@@ -56,7 +56,7 @@ export class Sum extends Indicator {
 
 export function sum(input:SumInput):number[] {
       Indicator.reverseInputs(input);
-      var result = new Sum(input).result;
+      let result = new Sum(input).result;
       if(input.reversedInput) {
           result.reverse();
       }

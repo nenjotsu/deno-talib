@@ -1,11 +1,11 @@
 /**
  * Created by AAravindan on 5/4/16.
  */
-var MACD = require('../../lib/moving_averages/MACD').MACD;
-var assert = require('assert');
-var data   = require('../data');
+let MACD = require('../../lib/moving_averages/MACD').MACD;
+let assert = require('assert');
+let data   = require('../data');
 
-var macdInput = {
+let macdInput = {
   values            : data.close,
   fastPeriod        : 5,
   slowPeriod        : 8,
@@ -14,7 +14,7 @@ var macdInput = {
   SimpleMASignal    : false
 }
 
-var expectedOutput = [
+let expectedOutput = [
          {
            "MACD": 1.5206018518518647,
            "histogram": undefined,
@@ -72,7 +72,7 @@ var expectedOutput = [
          },
        ];
 
-var input;
+let input;
 
 describe('MACD (Moving Average Convergence Divergence)', function() {
 
@@ -85,16 +85,16 @@ describe('MACD (Moving Average Convergence Divergence)', function() {
   });
 
   it('should be able to get EMA from the get results', function() {
-    var macd = new MACD(input);
+    let macd = new MACD(input);
     assert.deepEqual(macd.getResult(), expectedOutput,'Wrong Results');
   });
 
   it('should be able to get MACD for the next bar using nextValue', function() {
     input.values = [];
-    var macd = new MACD(input);
-    var results = [];
+    let macd = new MACD(input);
+    let results = [];
     macdInput.values.forEach(price => {
-      var result = macd.nextValue(price);
+      let result = macd.nextValue(price);
       if(result)
         results.push(result)
     });

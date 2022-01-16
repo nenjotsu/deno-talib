@@ -1,10 +1,10 @@
 /**
  * Created by AAravindan on 5/4/16.
  */
-var HeikinAshi = require('../../lib/chart_types/HeikinAshi').HeikinAshi;
-var assert = require('assert');
+let HeikinAshi = require('../../lib/chart_types/HeikinAshi').HeikinAshi;
+let assert = require('assert');
 
-var data = {
+let data = {
     open : [58.67,57.46,56.37,55.98,54.79,52.21,51.31,51.82,51.58],
     high : [58.82,57.72,56.88,56.09,55.03,53.12,53.08,50.04,53.69],
     low :  [57.03,56.21,55.35,54.17,52.32,50.59,49.93,50.80,51.34],
@@ -92,8 +92,8 @@ describe('HeikinAshi (Calculate Heikin ashi bars)', function() {
 
   it('should be able to get HeikinAshi for the next bar using nextValue', function() {
     input.values = [];
-    var heikinAshi = new HeikinAshi(input);
-    var result = heikinAshi.nextValue({
+    let heikinAshi = new HeikinAshi(input);
+    let result = heikinAshi.nextValue({
         open : 53.42,
         high: 53.90,
         low : 52.88,
