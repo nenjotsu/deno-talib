@@ -1,5 +1,4 @@
-# deno-talib
-A javascript technical indicators written in typescript for deno.
+Technical indicators (TALib) written in typescript for deno.
 
 ![alt text](deno-talib-logo.jpg "deno-talib logo")
 
