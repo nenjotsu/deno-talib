@@ -35,7 +35,7 @@ const expectedResult = [
     86.41,86.43,89.65,86.50,84.96,80.54,77.56,58.06
 ];
 
-console.log(RSI.calculate(inputRSI))
+RSI.calculate(inputRSI)
 ```
 
 There are three ways you can use to get the indicator results.
@@ -46,15 +46,19 @@ Every indicator has a static method `calculate` which can be used to calculate t
 
 ```typescript
 import { SMA } from 'https://deno.land/x/talib/index.ts';
+
 let prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
 let period = 10;
+
 sma({period : period, values : prices})
 ```
 
 ```typescript
 import { SMA } from 'https://deno.land/x/talib/index.ts';
+
 let prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
 let period = 10;
+
 SMA.calculate({period : period, values : prices})
 ```
 
@@ -65,6 +69,7 @@ SMA.calculate({period : period, values : prices})
 ```typescript
 let sma = new SMA({period : period, values : []});
 let results = [];
+
 prices.forEach(price => {
   let result = sma.nextValue(price);
   if(result)
@@ -82,6 +87,7 @@ This a merge of calculate and nextValue. The usual use case would be
 
 ```typescript
 let sma = new SMA({period : period, values : prices});
+
 sma.getResult(); // [5.5, 6.6, 7.7, 8.9]
 sma.nextValue(16); // 10.1
 ```
@@ -94,7 +100,25 @@ This uses regular javascript numbers, so there can be rounding errors which are 
 
 ```typescript
 import talib from 'https://deno.land/x/talib/index.ts';
+
 talib.setConfig('precision', 10);
+```
+
+### Bullish or Bearish Indicator
+
+Search for all bullish or bearish using
+
+```typescript
+import { bullish } from 'https://deno.land/x/talib/index.ts';
+
+const twoDayBullishInput = {
+  open: [23.25,15.36],
+  high: [25.10,30.87],
+  close: [21.44,27.89],
+  low: [20.82,14.93],
+}
+
+bullish(twoDayBullishInput) // true
 ```
 
 ## Available Indicators
