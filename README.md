@@ -6,6 +6,8 @@ coverY: 0
 
 # deno-talib
 
+[API Documentation & Examples](https://nenjo-tsu.gitbook.io/deno-talib/) [https://nenjo-tsu.gitbook.io/deno-talib/](https://nenjo-tsu.gitbook.io/deno-talib/)
+
 ![https://deno.land/x/talib](.gitbook/assets/deno-talib-logo.jpg)
 
 ## Installation
