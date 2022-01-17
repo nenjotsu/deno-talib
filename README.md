@@ -4,15 +4,13 @@ cover: .gitbook/assets/dylan-calluy-JpflvzEl5cg-unsplash.jpeg
 coverY: 0
 ---
 
-# deno-talib
+# 🦕 deno-talib
 
-[API Documentation & Examples](https://nenjo-tsu.gitbook.io/deno-talib/) [https://nenjo-tsu.gitbook.io/deno-talib/](https://nenjo-tsu.gitbook.io/deno-talib/)
-
-![https://deno.land/x/talib](.gitbook/assets/deno-talib-logo.jpg)
+![https://deno.land/x/talib](<.gitbook/assets/deno-talib-logo (1).jpg>)
 
 ## Installation
 
-```
+```bash
 deno install https://deno.land/x/talib/index.ts
 
 # or force to upgrade
@@ -24,7 +22,7 @@ deno install -f https://deno.land/x/talib@0.0.9/index.ts
 
 ## Basic Usage
 
-```
+```typescript
 import { RSI } from 'https://deno.land/x/talib/index.ts';
 # or specific version 
 # import { RSI } from 'https://deno.land/x/talib@0.0.5/index.ts';
@@ -40,18 +38,21 @@ const expectedResult = [
 console.log(RSI.calculate(inputRSI))
 ```
 
-## Want to jump right in?
+## Available Indicators
 
-Feeling like an eager beaver? Jump in to the quick start docs and get making your first request:
+* [ ] Accumulation Distribution Line (ADL)
+* [ ] Average Directional Index (ADX)
 
-{% content-ref url="quick-start.md" %}
-[quick-start.md](quick-start.md)
-{% endcontent-ref %}
+## Reference
 
-## Want to deep dive?
+### Deno Url
 
-Dive a little deeper and start exploring our API reference to get an idea of everything that's possible with the API:
+{% embed url="https://deno.land/x/talib" %}
+[https://deno.land/x/talib](https://deno.land/x/talib)
+{% endembed %}
 
-{% content-ref url="reference/api-reference/" %}
-[api-reference](reference/api-reference/)
-{% endcontent-ref %}
+### Documentation
+
+{% embed url="https://nenjo-tsu.gitbook.io/deno-talib" %}
+API Documentation
+{% endembed %}

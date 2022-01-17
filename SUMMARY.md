@@ -1,7 +1,6 @@
 # Table of contents
 
-* [deno-talib](README.md)
-* [Quick Start](quick-start.md)
+* [🦕 deno-talib](README.md)
 
 ## Reference
 
