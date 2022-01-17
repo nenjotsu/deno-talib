@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Welcome!](README.md)
+* [deno-talib](README.md)
 * [Quick Start](quick-start.md)
 
 ## Reference
