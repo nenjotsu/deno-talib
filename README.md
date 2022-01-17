@@ -40,7 +40,7 @@ console.log(RSI.calculate(inputRSI))
 
 There are three ways you can use to get the indicator results.
 
-### calculate
+### 1. calculate
 
 Every indicator has a static method `calculate` which can be used to calculate the indicator without creating an object.
 
@@ -51,9 +51,53 @@ let period = 10;
 sma({period : period, values : prices})
 ```
 
+```typescript
+import { SMA } from 'https://deno.land/x/talib/index.ts';
+let prices = [1,2,3,4,5,6,7,8,9,10,12,13,15];
+let period = 10;
+SMA.calculate({period : period, values : prices})
+```
+
+### 2. nextValue
+
+`nextValue` method is used to get the next indicator value.
+
+```typescript
+let sma = new SMA({period : period, values : []});
+let results = [];
+prices.forEach(price => {
+  let result = sma.nextValue(price);
+  if(result)
+    results.push(result)
+});
+```
+
+### 3. getResult
+
+This a merge of calculate and nextValue. The usual use case would be
+
+* Initialize indicator with available price value
+* Get results for initialized values
+* Use nextValue to get next indicator values for further tick.
+
+```typescript
+let sma = new SMA({period : period, values : prices});
+sma.getResult(); // [5.5, 6.6, 7.7, 8.9]
+sma.nextValue(16); // 10.1
+```
+
+> **Note**: Calling nextValue will not update `getResult()` value.&#x20;
+
+### Precision
+
+This uses regular javascript numbers, so there can be rounding errors which are negligible for a technical indicators, you can set precision by using the below config. By default there is no precision set.
+
+```typescript
+import talib from 'https://deno.land/x/talib/index.ts';
+talib.setConfig('precision', 10);
+```
+
 ## Available Indicators
-
-
 
 * [x] Accumulation Distribution Line (ADL)
 * [x] Average Directional Index (ADX)
@@ -63,7 +107,7 @@ sma({period : period, values : prices})
 * [x] Commodity Channel Index (CCI)
 * [x] Force Index (FI)
 * [x] Know Sure Thing (KST)
-* [x] Moneyflow Index (MFI)
+* [x] Money Flow Index (MFI)
 * [x] Moving Average Convergence Divergence (MACD)
 * [x] On Balance Volume (OBV)
 * [x] Parabolic Stop and Reverse (PSAR)
@@ -149,5 +193,11 @@ sma({period : period, values : prices})
 {% embed url="https://nenjo-tsu.gitbook.io/deno-talib" %}
 API Documentation
 {% endembed %}
+
+## Contribute
+
+Create [issues](https://github.com/nenjotsu/deno-talib/issues) about anything you want to report, change of API's, or request for adding new indicators. You can also create pull request with new indicators.
+
+#### Thanks
 
 Original node package is from [anandanand84](https://github.com/anandanand84). Thanks to [https://github.com/anandanand84/technicalindicators](https://github.com/anandanand84/technicalindicators)
