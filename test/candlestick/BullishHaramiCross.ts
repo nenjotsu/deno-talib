@@ -1,7 +1,9 @@
-let BullishHaramiCross = require('../../lib/candlestick/BullishHaramiCross').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let BullishHaramiCross from '../../src/candlestick/BullishHaramiCross').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [25.13, 23.45],
@@ -10,15 +12,15 @@ let input = {
   low: [21.7,23.07],
 }
 
-describe('BullishHaramiCross: ', function() {
+Deno.test('BullishHaramiCross: ', function() {
   before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BullishHaramiCross.png',imageBuffer);
   });
-  it('Check whether the supplied data has BullishHaramiCross pattern', function() {
+  Deno.test('Check whether the supplied data has BullishHaramiCross pattern', function() {
    let bullishHaramiCross = new BullishHaramiCross ();
    let result = bullishHaramiCross.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for BullishHaramiCross')
+   assertEquals(result, true, 'Invalid result for BullishHaramiCross')
    
   });
 })

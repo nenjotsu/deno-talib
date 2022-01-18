@@ -1,9 +1,11 @@
 // "use strict"
-// let StochasticRSI = require('../../lib/momentum/StochasticRSI').StochasticRSI;
-// let AverageGain = require('../../lib/Utils/AverageGain').AverageGain;
-// let AverageLoss = require('../../lib/Utils/AverageLoss').AverageLoss;
-// let assert = require("assert");
-// let data = require('../data');
+// let StochasticRSI from '../../src/momentum/StochasticRSI').StochasticRSI;
+// let AverageGain from '../../src/Utils/AverageGain').AverageGain;
+// let AverageLoss from '../../src/Utils/AverageLoss').AverageLoss;
+// import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+// let data from '../data');
 
 // let inputStochasticRSI = {
 //   values : [44.34,44.09,44.15,43.61,44.33,44.83,45.10,45.42,45.84,46.08,45.89,46.03,45.61,46.28,46.28,46.00,46.03,46.41,46.22,45.64,46.21,46.25,45.71,46.45,45.78,45.35,44.03,44.18,44.22,44.57,43.42,42.66,43.13],
@@ -34,8 +36,8 @@
 //   37.79
 // ];
 
-// describe('StochasticRSI', function () {
-//   it('should calculate StochasticRSI using the calculate method', function () {
-//     assert.deepEqual(StochasticRSI.calculate(inputStochasticRSI), expectedResult, 'Wrong Results');
+// Deno.test('StochasticRSI', function () {
+//   Deno.test('should calculate StochasticRSI using the calculate method', function () {
+//     assertEquals(StochasticRSI.calculate(inputStochasticRSI), expectedResult, 'Wrong Results');
 //   });
 // })

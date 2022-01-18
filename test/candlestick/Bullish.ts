@@ -1,8 +1,8 @@
-let Bullish = require('../../lib/candlestick/Bullish.js').default;
-let bullish = require('../../lib/candlestick/Bullish.js').bullish;
-let assert                  = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let Bullish from '../../src/candlestick/Bullish.js').default;
+let bullish from '../../src/candlestick/Bullish.js').bullish;
+let assert                  from 'assert');
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [21.12,21.48,21.80],//21.80
@@ -11,17 +11,17 @@ let input = {
   low: [20.85,21.36,21.66],//21.66
 }
 
-describe('BullishPattern : ', function() {
+Deno.test('BullishPattern : ', function() {
   before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/Bullish.png',imageBuffer);
   });
-  it('Check whether the supplied data has Bullish pattern', function() {
+  Deno.test('Check whether the supplied data has Bullish pattern', function() {
    let BullishPattern = new Bullish ();
    let result        = BullishPattern.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for BullishPattern');
+   assertEquals(result, true, 'Invalid result for BullishPattern');
   });
-  it('Check whether the supplied data has Bullish pattern if reversed and using static', function() {
+  Deno.test('Check whether the supplied data has Bullish pattern if reversed and using static', function() {
    let BullishPattern = new Bullish ();
    input.open.reverse()
    input.high.reverse()
@@ -29,7 +29,7 @@ describe('BullishPattern : ', function() {
    input.close.reverse()
    input.reversedInput = true;
    let result        = bullish(input);
-   assert.deepEqual(result, true, 'Invalid result for BullishPattern');
+   assertEquals(result, true, 'Invalid result for BullishPattern');
   });
 })
 

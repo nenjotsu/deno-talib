@@ -1,7 +1,7 @@
-let BearishHammer   = require('../../lib/candlestick/BearishHammerStick').default;
-let assert          = require('assert');
-let drawCandleStick = require('draw-candlestick');
-let fs              = require('fs');
+let BearishHammer   from '../../src/candlestick/BearishHammerStick').default;
+let assert          from 'assert');
+let drawCandleStick from 'draw-candlestick');
+let fs              from 'fs');
 
 let basicHammer = {
   open: [30.10],
@@ -10,14 +10,14 @@ let basicHammer = {
   low: [10.06],
 }
 
-describe('Bearish Hammer (Single Stick) : ', function() {
+Deno.test('Bearish Hammer (Single Stick) : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(basicHammer);
     fs.writeFileSync(__dirname+'/images/BearishHammerStick.png',imageBuffer);
   });
-  it('Check whether the supplied data has Bearish Hammer (Single Stick) pattern', function() {
+  Deno.test('Check whether the supplied data has Bearish Hammer (Single Stick) pattern', function() {
    let bearishHammer = new BearishHammer();
    let result = bearishHammer.hasPattern(basicHammer);
-   assert.deepEqual(result, true, 'Invalid result for Bearish Hammer (Single Stick)');
+   assertEquals(result, true, 'Invalid result for Bearish Hammer (Single Stick)');
   });
 })

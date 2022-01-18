@@ -1,9 +1,11 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-let WilderSmoothing = require('../../lib/moving_averages/WilderSmoothing').WilderSmoothing;
-let assert = require('assert');
-let data   = require('../data');
+let WilderSmoothing from '../../src/moving_averages/WilderSmoothing').WilderSmoothing;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data');
 
 let prices = [
 0.959399999999999,
@@ -36,23 +38,23 @@ let expectedResult = [
 ];
 let period = 14;
 
-describe('WilderSmoothing (Wilder smoothing)', function() {
-  it('should calculate WilderSmoothing using the calculate method', function() {
-    assert.deepEqual(WilderSmoothing.calculate({
+Deno.test('WilderSmoothing (Wilder smoothing)', function() {
+  Deno.test('should calculate WilderSmoothing using the calculate method', function() {
+    assertEquals(WilderSmoothing.calculate({
       period : period,
       values : prices
     }), expectedResult, 'Wrong Results');
   });
 
-  it('should be able to get WilderSmoothing for the next bar', function() {
+  Deno.test('should be able to get WilderSmoothing for the next bar', function() {
     let wilderSmoothing = new WilderSmoothing({
       period : period,
       values : prices
     });
-    assert.deepEqual(wilderSmoothing.getResult(),  expectedResult, 'Wrong Results while getting results');
+    assertEquals(wilderSmoothing.getResult(),  expectedResult, 'Wrong Results while getting results');
   })
 
-  it('should be able to get WilderSmoothing for the next bar using nextValue', function() {
+  Deno.test('should be able to get WilderSmoothing for the next bar using nextValue', function() {
     let wilderSmoothing = new WilderSmoothing({
       period : period,
       values : []
@@ -63,6 +65,6 @@ describe('WilderSmoothing (Wilder smoothing)', function() {
       if(result)
         results.push(result)
     });
-    assert.deepEqual(results,  expectedResult, 'Wrong Results while getting results');
+    assertEquals(results,  expectedResult, 'Wrong Results while getting results');
   })
 })

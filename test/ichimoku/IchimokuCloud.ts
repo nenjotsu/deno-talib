@@ -1,9 +1,9 @@
 /**
  * Created by AAravindan on 5/4/16.
  */
-let IchimokuCloud = require('../../lib/ichimoku/IchimokuCloud').IchimokuCloud
-let assert = require('assert')
-let data = require('../data')
+let IchimokuCloud from '../../src/ichimoku/IchimokuCloud').IchimokuCloud
+let assert from 'assert')
+let data from '../data')
 
 let ichimokuInput = {
   high  : [130,135.475005,134.699995,147.899995,153.199995,155,151.875,150.600005,151,151,168.875,180.925005,212.350005,255,248.949995,255,291.399995,302.95001,310,300,325,316.524995,229.125,245.25,277.5,259.875,300,293.5,273.95001,275,298.899995,300.399995,288.45001,277.875,337.5,355.95001,399.5,420,404.95001,432.92499,450.42499,468,362.17499,404,525,592.2,532,550,569.95,598.4,620,657.975,652.5,714,722.2,691.9,813.3,898.9,900,974.25,982.9,1207.5,1427.225,1464,1494,1649,1321,1214.19995,1359,1354.5,1222,1169.225,1188,1112.5,981.5,752.6,703.5,695,707.05,791.7,920,1267.5,1189.5,1091.5,1062.5,1119.94995,1141.65,1112.94995,1120,1149.9,1056.35,1111,1149.7,1093.4,1093.95,1094.45,1031,1048.5,1110,1124.9,1075,1091.4,1009.4,1055,1065.9,986.79999,967,907,838.90002,859,904,905,844.59998,827.90002,864.70001,830,762.90002,751.40002,742.95001,746.09998,824.90002,881.59998,862,814.90002,849.79999,955,901,869.40002,826.59998,855,873,927.90002,882.84998,901,918,926.54999,909,898.25,829.79999,939.79999,988.75,1145.25,1133,1043.3,1023,1041.3,1003.7,1017.35,991.95001,934.5,943.79999,909.65002,944.29999,915.40002,1014.1,1067.85,1013.85,899.5,974.79999,992.5,1019.7,1089.75,1041.8,1056,1069.9,994.95001],
@@ -709,23 +709,23 @@ let expectedOutput = [
 
 let input;
 
-describe('Ichimoku cloud', function () {
+Deno.test('Ichimoku cloud', function () {
   beforeEach(function () {
     input = JSON.parse(JSON.stringify(ichimokuInput))
   })
 
-  it('should calculate IchimokuCloud using the calculate method', function () {
+  Deno.test('should calculate IchimokuCloud using the calculate method', function () {
     let result = IchimokuCloud.calculate(input)
     // require('fs').writeFileSync('ichimoku', JSON.stringify(result, null, 2))
-    assert.deepEqual(result, expectedOutput, 'Wrong Results')
+    assertEquals(result, expectedOutput, 'Wrong Results')
   })
 
-  it('should be able to get ichimoku cloud from the get results', function () {
+  Deno.test('should be able to get ichimoku cloud from the get results', function () {
     let ichimoku = new IchimokuCloud(input)
-    assert.deepEqual(ichimoku.getResult(), expectedOutput, 'Wrong Results')
+    assertEquals(ichimoku.getResult(), expectedOutput, 'Wrong Results')
   })
 
-  it('should be able to get IchimokuCloud for the next bar using nextValue', function () {
+  Deno.test('should be able to get IchimokuCloud for the next bar using nextValue', function () {
     input.high = []
     input.low = []
     let ichimoku = new IchimokuCloud(input)
@@ -735,6 +735,6 @@ describe('Ichimoku cloud', function () {
       if (result)
         results.push(result)
     })
-    assert.deepEqual(results, expectedOutput, 'Wrong Results')
+    assertEquals(results, expectedOutput, 'Wrong Results')
   })
 })

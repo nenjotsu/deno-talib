@@ -5,6 +5,8 @@ import { CandleData } from "../StockData.ts";
 export class AwesomeOscillatorInput extends IndicatorInput {
   high: number[] = [];
   low: number[] = [];
+  close?: number[] = [];
+  volume?: number[] = [];
   // @ts-ignore
   fastPeriod: number;
   // @ts-ignore
@@ -17,6 +19,7 @@ export class AwesomeOscillator extends Indicator {
     super(input);
     let highs = input.high;
     let lows = input.low;
+    let close = input.close;
     let fastPeriod = input.fastPeriod;
     let slowPeriod = input.slowPeriod;
 

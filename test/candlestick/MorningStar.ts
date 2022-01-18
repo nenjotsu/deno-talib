@@ -1,7 +1,9 @@
-let MorningStar = require('../../lib/candlestick/MorningStar').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let MorningStar from '../../src/candlestick/MorningStar').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 // let input = {
 //   open: [22.20,19.80,20.70],
@@ -17,15 +19,15 @@ let input = {
   low: [20.65,19.60,20.40]
 }
 
-describe('MorningStar : ', function() {
+Deno.test('MorningStar : ', function() {
   before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/MorningStar.png',imageBuffer);
   });
-  it('Check whether the supplied data has MorningStar pattern', function() {
+  Deno.test('Check whether the supplied data has MorningStar pattern', function() {
    let morningStar = new MorningStar ();
    let result      = morningStar.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for MorningStar');
+   assertEquals(result, true, 'Invalid result for MorningStar');
   });
 })
 

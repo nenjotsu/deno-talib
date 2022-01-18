@@ -1,8 +1,10 @@
 /**
  * Created by AAravindan on 5/4/16.
  */
-let HeikinAshi = require('../../lib/chart_types/HeikinAshi').HeikinAshi;
-let assert = require('assert');
+let HeikinAshi from '../../src/chart_types/HeikinAshi').HeikinAshi;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
 
 let data = {
     open : [58.67,57.46,56.37,55.98,54.79,52.21,51.31,51.82,51.58],
@@ -80,17 +82,17 @@ let expectedOutput = {
         ]
       }
 
-describe('HeikinAshi (Calculate Heikin ashi bars)', function() {
+Deno.test('HeikinAshi (Calculate Heikin ashi bars)', function() {
   let input = {};
   beforeEach(function(){
     input = JSON.parse(JSON.stringify(data));
   });
 
-  it('should calculate HeikinAshi using the calculate method', function() {
-    assert.deepEqual(HeikinAshi.calculate(input), expectedOutput,'Wrong Results');
+  Deno.test('should calculate HeikinAshi using the calculate method', function() {
+    assertEquals(HeikinAshi.calculate(input), expectedOutput,'Wrong Results');
   });
 
-  it('should be able to get HeikinAshi for the next bar using nextValue', function() {
+  Deno.test('should be able to get HeikinAshi for the next bar using nextValue', function() {
     input.values = [];
     let heikinAshi = new HeikinAshi(input);
     let result = heikinAshi.nextValue({
@@ -99,6 +101,6 @@ describe('HeikinAshi (Calculate Heikin ashi bars)', function() {
         low : 52.88,
         close : 53.57 
     });
-    assert.deepEqual(result,  { timestamp : 0, volume: 0, open : 52.0780517578125, high : 53.90, low : 52.0780517578125, close : 53.4425}, 'Wrong Results');
+    assertEquals(result,  { timestamp : 0, volume: 0, open : 52.0780517578125, high : 53.90, low : 52.0780517578125, close : 53.4425}, 'Wrong Results');
   });
 });

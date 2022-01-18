@@ -4,9 +4,12 @@ import { CandleData } from '../StockData.ts';
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 
 export class ForceIndexInput extends IndicatorInput {
+  open : number[];
   close : number[];
   volume : number[];
-  period : number = 1;
+  high : number[];
+  low : number[];
+  period?: number = 1;
 };
 
 
@@ -15,6 +18,9 @@ export class ForceIndex extends Indicator {
   generator:IterableIterator<number | undefined>;;
   constructor(input:ForceIndexInput) {
     super(input);
+    let open = input.open;
+    let low = input.low;
+    let high = input.high;
     let closes = input.close;
     let volumes = input.volume;
     let period = input.period || 1

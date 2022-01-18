@@ -1,8 +1,10 @@
 /**
  * Created by AAravindan on 5/8/16.
  */
-let assert = require('assert');
-let ATR    = require('../../lib/directionalmovement/ATR').ATR;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let ATR    from '../../src/directionalmovement/ATR').ATR;
 
 let period = 14
 
@@ -73,19 +75,19 @@ let expected =   [
       1.307982853379376,
   ];
 
-describe('ATR (Average True Range)', function() {
-  it('should calculate ATR using the calculate method', function() {
-    assert.deepEqual(ATR.calculate(input), expectResult, 'Wrong Results');
+Deno.test('ATR (Average True Range)', function() {
+  Deno.test('should calculate ATR using the calculate method', function() {
+    assertEquals(ATR.calculate(input), expectResult, 'Wrong Results');
   });
 
-  it('should be able to caÎlculate ATR by using getResult', function() {
+  Deno.test('should be able to caÎlculate ATR by using getResult', function() {
     let atr = new ATR(input);
-    assert.deepEqual(atr.getResult(),  expected, 'Wrong Results while calculating next bar');
+    assertEquals(atr.getResult(),  expected, 'Wrong Results while calculating next bar');
   });
 
 
 
-  it('should be able to get ATR for the next bar using nextValue', function() {
+  Deno.test('should be able to get ATR for the next bar using nextValue', function() {
     let atr = new ATR({period : period, high : [], low:[], close:[]});
     let results = [];
     input.close.forEach(function(close,index) {
@@ -98,7 +100,7 @@ describe('ATR (Average True Range)', function() {
         results.push(parseFloat(result.toPrecision(4)));
       }
     });
-    assert.deepEqual(results, expectResultNextBar, 'Wrong Results while getting results');
+    assertEquals(results, expectResultNextBar, 'Wrong Results while getting results');
   })
 
 })

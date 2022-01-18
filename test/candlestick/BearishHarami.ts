@@ -1,7 +1,9 @@
-let BearishHarami = require('../../lib/candlestick/BearishHarami').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let BearishHarami from '../../src/candlestick/BearishHarami').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [20.12, 22,13],
@@ -10,15 +12,15 @@ let input = {
   low: [19.88,21.31],
 }
 
-describe('BearishHarami : ', function() {
+Deno.test('BearishHarami : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BearishHarami.png',imageBuffer);
   });
-  it('Check whether the supplied data has BearishHarami pattern', function() {
+  Deno.test('Check whether the supplied data has BearishHarami pattern', function() {
    let bearishHarami = new BearishHarami ();
    let result = bearishHarami.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for BearishHarami')
+   assertEquals(result, true, 'Invalid result for BearishHarami')
    
   });
 })

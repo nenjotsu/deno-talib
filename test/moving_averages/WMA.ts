@@ -1,9 +1,11 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-let WMA = require('../../lib/moving_averages/WMA').WMA;
-let assert = require('assert');
-let data   = require('../data');
+let WMA from '../../src/moving_averages/WMA').WMA;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data');
 
 let prices = data.close;
 let expectedResult = [
@@ -20,23 +22,23 @@ let expectedResult = [
 ];
 let period = 9;
 
-describe('WMA (Weighted Moving Average)', function() {
-  it('should calculate WMA using the calculate method', function() {
-    assert.deepEqual(WMA.calculate({
+Deno.test('WMA (Weighted Moving Average)', function() {
+  Deno.test('should calculate WMA using the calculate method', function() {
+    assertEquals(WMA.calculate({
       period : period,
       values : prices
     }), expectedResult, 'Wrong Results');
   });
 
-  it('should be able to get WMA for the next bar', function() {
+  Deno.test('should be able to get WMA for the next bar', function() {
     let wma = new WMA({
       period : period,
       values : prices
     });
-    assert.deepEqual(wma.getResult(),  expectedResult, 'Wrong Results while getting results');
+    assertEquals(wma.getResult(),  expectedResult, 'Wrong Results while getting results');
   })
 
-  it('should be able to get WMA for the next bar using nextValue', function() {
+  Deno.test('should be able to get WMA for the next bar using nextValue', function() {
     let wma = new WMA({
       period : period,
       values : []
@@ -47,6 +49,6 @@ describe('WMA (Weighted Moving Average)', function() {
       if(result)
         results.push(result)
     });
-    assert.deepEqual(results,  expectedResult, 'Wrong Results while getting results');
+    assertEquals(results,  expectedResult, 'Wrong Results while getting results');
   })
 })

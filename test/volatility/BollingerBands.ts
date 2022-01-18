@@ -2,9 +2,11 @@
  * Created by AAravindan on 5/3/16.
  */
 "use strict"
-let BB = require('../../lib/volatility/BollingerBands').BollingerBands;
-let assert = require('assert');
-let data = require('../data')
+let BB from '../../src/volatility/BollingerBands').BollingerBands;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data from '../data')
 
 let prices = data.close;
 
@@ -69,17 +71,17 @@ let expectResult = [
 ]
 
 
-describe('BB (Bollinger Bands)', function () {
-  it('should calculate BB using the calculate method', function () {
-    assert.deepEqual(BB.calculate({ period: period, values: prices, stdDev: stdDev }), expectResult, 'Wrong Results');
+Deno.test('BB (Bollinger Bands)', function () {
+  Deno.test('should calculate BB using the calculate method', function () {
+    assertEquals(BB.calculate({ period: period, values: prices, stdDev: stdDev }), expectResult, 'Wrong Results');
   });
 
-  it('should be able to calculate BB by using getResult', function () {
+  Deno.test('should be able to calculate BB by using getResult', function () {
     let bb = new BB({ period: period, values: prices, stdDev: stdDev });
-    assert.deepEqual(bb.getResult(), expectResult, 'Wrong Results while calculating next bar');
+    assertEquals(bb.getResult(), expectResult, 'Wrong Results while calculating next bar');
   });
 
-  it('should be able to get BB for the next bar using nextValue', function () {
+  Deno.test('should be able to get BB for the next bar using nextValue', function () {
     let bb = new BB({ period: period, values: [], stdDev: stdDev });
     let results = [];
     prices.forEach(price => {
@@ -87,10 +89,10 @@ describe('BB (Bollinger Bands)', function () {
       if (result)
         results.push(result)
     });
-    assert.deepEqual(results, expectResult, 'Wrong Results while getting results');
+    assertEquals(results, expectResult, 'Wrong Results while getting results');
   })
 
-  it('should be able to calculate BB for reversed input by using calculate method', function () {
+  Deno.test('should be able to calculate BB for reversed input by using calculate method', function () {
     let myInput = Object.assign({}, {
       period: period,
       values: prices,
@@ -98,7 +100,7 @@ describe('BB (Bollinger Bands)', function () {
     });
     myInput.reversedInput = true;
     myInput.values.reverse();
-    assert.deepEqual(BB.calculate(myInput), expectResult.slice().reverse(), 'Wrong Results while calculating next bar');
+    assertEquals(BB.calculate(myInput), expectResult.slice().reverse(), 'Wrong Results while calculating next bar');
   });
 
 })

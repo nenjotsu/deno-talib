@@ -1,7 +1,9 @@
-let DownsideTasukiGap = require('../../lib/candlestick/DownsideTasukiGap').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let DownsideTasukiGap from '../../src/candlestick/DownsideTasukiGap').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [45.00, 33.45, 30.20],
@@ -11,15 +13,15 @@ let input = {
   
 }
 
-describe('DownsideTasukiGap : ', function() {
+Deno.test('DownsideTasukiGap : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/downsideTasukiGap.png',imageBuffer);
   });
-  it('Check whether the supplied data has DownsideTasukiGap pattern', function() {
+  Deno.test('Check whether the supplied data has DownsideTasukiGap pattern', function() {
    let downsideTasukiGap = new DownsideTasukiGap ();
    let result        = downsideTasukiGap.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for DownsideTasukiGap');
+   assertEquals(result, true, 'Invalid result for DownsideTasukiGap');
   });
 })
 

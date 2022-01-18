@@ -1,7 +1,9 @@
-let GraveStoneDoji = require('../../lib/candlestick/GraveStoneDoji').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let GraveStoneDoji from '../../src/candlestick/GraveStoneDoji').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [30.10],
@@ -19,19 +21,19 @@ let inputDot = {
 
 }
 
-describe('GraveStoneDoji : ', function() {
+Deno.test('GraveStoneDoji : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/graveStoneDoji.png',imageBuffer);
   });
-  it('Check whether the supplied data has GraveStoneDoji pattern', function() {
+  Deno.test('Check whether the supplied data has GraveStoneDoji pattern', function() {
    let graveStoneDoji = new GraveStoneDoji();
    let result = graveStoneDoji.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for GraveStoneDoji');
+   assertEquals(result, true, 'Invalid result for GraveStoneDoji');
   });
-  it('Check whether the supplied data has GraveStoneDoji pattern', function() {
+  Deno.test('Check whether the supplied data has GraveStoneDoji pattern', function() {
    let graveStoneDoji = new GraveStoneDoji();
    let result = graveStoneDoji.hasPattern(inputDot);
-   assert.deepEqual(result, false, 'Invalid result for a single point Doji');
+   assertEquals(result, false, 'Invalid result for a single point Doji');
   });
 })

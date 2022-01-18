@@ -1,9 +1,11 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-let EMA = require('../../lib/moving_averages/EMA').EMA;
-let assert = require('assert');
-let data   = require('../data');
+let EMA from '../../src/moving_averages/EMA').EMA;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data');
 
 let prices = data.close;
 let period = 9;
@@ -21,17 +23,17 @@ let expectedOutput = [
 ]
 
 
-describe('EMA (Exponential Moving Average)', function() {
-  it('should calculate EMA using the calculate method', function() {
-    assert.deepEqual(EMA.calculate({period : period, values : prices}), expectedOutput, 'Wrong Results');
+Deno.test('EMA (Exponential Moving Average)', function() {
+  Deno.test('should calculate EMA using the calculate method', function() {
+    assertEquals(EMA.calculate({period : period, values : prices}), expectedOutput, 'Wrong Results');
   });
 
-  it('should be able to get EMA from the get results', function() {
+  Deno.test('should be able to get EMA from the get results', function() {
     let emaProducer = new EMA({period : period, values : prices});
-    assert.deepEqual(emaProducer.getResult(),  expectedOutput, 'Wrong Results while getting results');
+    assertEquals(emaProducer.getResult(),  expectedOutput, 'Wrong Results while getting results');
   });
 
-  it('should be able to get EMA for the next bar using nextValue', function() {
+  Deno.test('should be able to get EMA for the next bar using nextValue', function() {
     let emaProducer = new EMA({period : period, values : []});
     let results = [];
     prices.forEach(price => {
@@ -39,6 +41,6 @@ describe('EMA (Exponential Moving Average)', function() {
       if(result)
         results.push(result)
     });
-    assert.deepEqual(results,  expectedOutput, 'Wrong Results while getting results');
+    assertEquals(results,  expectedOutput, 'Wrong Results while getting results');
   })
 })

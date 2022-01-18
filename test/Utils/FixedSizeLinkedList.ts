@@ -2,25 +2,27 @@
  * Created by AAravindan on 5/7/16.
  */
 "use strict";
-let FixedSizeLinkedList = require("../../lib/Utils/FixedSizeLinkedList").default;
-let assert = require('assert');
+let FixedSizeLinkedList from "../../src/Utils/FixedSizeLinkedList").default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
 
 let linkedList;
 let size = 10;
 
-describe('Fixed Size Linked List', function() {
+Deno.test('Fixed Size Linked List', function() {
   beforeEach(function() {
     linkedList = new FixedSizeLinkedList(size, true, true, true);
   });
 
-  it('Should maintain only the fixed size', function() {
+  Deno.test('Should maintain only the fixed size', function() {
     for(let i=1; i<20; i++) {
       linkedList.push(i.toString())
     }
     assert.equal(linkedList.length, size);
   });
 
-  it('Should not popup if there is not enough', function(){
+  Deno.test('Should not popup if there is not enough', function(){
     for(let i=1; i<=10; i++) {
       linkedList.push(i.toString())
     }
@@ -37,7 +39,7 @@ describe('Fixed Size Linked List', function() {
     assert.equal(linkedList.tail, '12');
   })
 
-  it('Should popup out the first excess to the lastShift', function(){
+  Deno.test('Should popup out the first excess to the lastShift', function(){
     for(let i=1; i<=11; i++) {
       linkedList.push(i.toString())
     }
@@ -50,7 +52,7 @@ describe('Fixed Size Linked List', function() {
     assert.equal(linkedList.length, size);
   });
 
-  it('Should contain an iterator function', function(){
+  Deno.test('Should contain an iterator function', function(){
     for(let i=1; i<=11; i++) {
       linkedList.push(i.toString())
     }
@@ -59,45 +61,45 @@ describe('Fixed Size Linked List', function() {
     for(let values of linkedList.iterator()){
       results.push(values);
     }
-    assert.deepEqual(['2','3','4','5','6','7','8','9','10','11'], results);
+    assertEquals(['2','3','4','5','6','7','8','9','10','11'], results);
   })
 
-  it('Should maintain period high before shift', function(){
+  Deno.test('Should maintain period high before shift', function(){
     for(let i=1; i<=10; i++) {
       linkedList.push(i)
     }
     assert.equal(linkedList.periodHigh, 10)
   });
 
-  it('Should maintain period high after shift', function(){
+  Deno.test('Should maintain period high after shift', function(){
     for(let i=1; i<=13; i++) {
       linkedList.push(i)
     }
     assert.equal(linkedList.periodHigh, 13)
   })
 
-  it('Should maintain period low before shift', function(){
+  Deno.test('Should maintain period low before shift', function(){
     for(let i=1; i<=10; i++) {
       linkedList.push(i)
     }
     assert.equal(linkedList.periodLow, 1)
   });
 
-  it('Should maintain period low after shift', function(){
+  Deno.test('Should maintain period low after shift', function(){
     for(let i=1; i<=14; i++) {
       linkedList.push(i)
     }
     assert.equal(linkedList.periodLow, 5)
   })
 
-  it('Should maintain sum if requested', function(){
+  Deno.test('Should maintain sum if requested', function(){
     for(let i=1; i<=10; i++) {
       linkedList.push(i)
     }
     assert.equal(linkedList.periodSum, (10 * 11)/2 )
   })
   
-  it('Should maintain sum if requested', function(){
+  Deno.test('Should maintain sum if requested', function(){
     for(let i=1; i<=14; i++) {
       linkedList.push(i)
     }

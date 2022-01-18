@@ -1,9 +1,11 @@
 /**
  * Created by AAravindan on 5/4/16.
  */
-let MACD = require('../../lib/moving_averages/MACD').MACD;
-let assert = require('assert');
-let data   = require('../data');
+let MACD from '../../src/moving_averages/MACD').MACD;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data');
 
 let macdInput = {
   values            : data.close,
@@ -74,22 +76,22 @@ let expectedOutput = [
 
 let input;
 
-describe('MACD (Moving Average Convergence Divergence)', function() {
+Deno.test('MACD (Moving Average Convergence Divergence)', function() {
 
   beforeEach(function(){
     input = JSON.parse(JSON.stringify(macdInput));
   });
 
-  it('should calculate MACD using the calculate method', function() {
-    assert.deepEqual(MACD.calculate(input), expectedOutput,'Wrong Results');
+  Deno.test('should calculate MACD using the calculate method', function() {
+    assertEquals(MACD.calculate(input), expectedOutput,'Wrong Results');
   });
 
-  it('should be able to get EMA from the get results', function() {
+  Deno.test('should be able to get EMA from the get results', function() {
     let macd = new MACD(input);
-    assert.deepEqual(macd.getResult(), expectedOutput,'Wrong Results');
+    assertEquals(macd.getResult(), expectedOutput,'Wrong Results');
   });
 
-  it('should be able to get MACD for the next bar using nextValue', function() {
+  Deno.test('should be able to get MACD for the next bar using nextValue', function() {
     input.values = [];
     let macd = new MACD(input);
     let results = [];
@@ -98,7 +100,7 @@ describe('MACD (Moving Average Convergence Divergence)', function() {
       if(result)
         results.push(result)
     });
-    assert.deepEqual(results,  expectedOutput, 'Wrong Results');
+    assertEquals(results,  expectedOutput, 'Wrong Results');
 
   });
 });

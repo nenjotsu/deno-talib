@@ -1,9 +1,11 @@
 /**
 * Created by AAravindan on 5/5/16.
 */
-let AverageGain = require('../../lib/Utils/AverageGain').AverageGain;
-let assert = require("assert");
-let data = require('../data');
+let AverageGain from '../../src/Utils/AverageGain').AverageGain;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data from '../data');
 
 let input = {
  period : 14,
@@ -13,10 +15,10 @@ let input = {
 
 let expectedResults = [.24,.22,.21,.22,0.20,.19,.22,.20,.19,.23,.21,.20,.18,.18,.17,.18,.17,.16,.18]
 
-describe('Average Gain', function() {
+Deno.test('Average Gain', function() {
  "use strict";
- it('Should calculate average gain', function(){
-   assert.deepEqual(AverageGain.calculate(input).map(a=>parseFloat(a.toFixed(2))), expectedResults);
+ Deno.test('Should calculate average gain', function(){
+   assertEquals(AverageGain.calculate(input).map(a=>parseFloat(a.toFixed(2))), expectedResults);
  })
 });
 

@@ -1,7 +1,9 @@
-let AbandonedBaby = require('../../lib/candlestick/AbandonedBaby').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let AbandonedBaby from '../../src/candlestick/AbandonedBaby').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [31.10,26.18,27.47],
@@ -10,15 +12,15 @@ let input = {
   low: [27.50,25.40,27.03]
 }
 
-describe('AbandonedBaby : ', function() {
+Deno.test('AbandonedBaby : ', function() {
   before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/abandonedbaby.png',imageBuffer);
   });
-  it('Check whether the supplied data has AbandonedBaby pattern', function() {
+  Deno.test('Check whether the supplied data has AbandonedBaby pattern', function() {
    let abandonedBaby = new AbandonedBaby ();
    let result        = abandonedBaby.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for AbandonedBaby');
+   assertEquals(result, true, 'Invalid result for AbandonedBaby');
   });
 })
 

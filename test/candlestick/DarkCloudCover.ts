@@ -1,7 +1,9 @@
-let DarkCloudCover = require('../../lib/candlestick/DarkCloudCover').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let DarkCloudCover from '../../src/candlestick/DarkCloudCover').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [30.10,39.45],
@@ -11,15 +13,15 @@ let input = {
   
 }
 
-describe('DarkCloudCover: ', function() {
+Deno.test('DarkCloudCover: ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/darkCloudCover.png',imageBuffer);
   });
-  it('Check whether the supplied data has DarkCloudCover pattern', function() {
+  Deno.test('Check whether the supplied data has DarkCloudCover pattern', function() {
    let darkCloudCover = new DarkCloudCover ();
    let result        = darkCloudCover.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for DarkCloudCover');
+   assertEquals(result, true, 'Invalid result for DarkCloudCover');
   });
 })
 

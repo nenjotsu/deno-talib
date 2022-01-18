@@ -1,9 +1,11 @@
 /**
  * Created by AAravindan on 5/8/16.
  */
-let PlusDM = require('../../lib/directionalmovement/PlusDM').PDM;
-let assert = require('assert');
-let data   = require('../data')
+let PlusDM from '../../src/directionalmovement/PlusDM').PDM;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data')
 
 let period = 14;
 
@@ -55,17 +57,17 @@ let expectResult =  [
        ]
 
 
-describe('PlusDM', function() {
-  it('should calculate PlusDM using the calculate method', function() {
-    assert.deepEqual(PlusDM.calculate(input), expectResult, 'Wrong Results');
+Deno.test('PlusDM', function() {
+  Deno.test('should calculate PlusDM using the calculate method', function() {
+    assertEquals(PlusDM.calculate(input), expectResult, 'Wrong Results');
   });
 
-  it('should be able to calculate PlusDM by using getResult', function() {
+  Deno.test('should be able to calculate PlusDM by using getResult', function() {
     let plusDm = new PlusDM(input);
-    assert.deepEqual(plusDm.getResult(),  expectResult, 'Wrong Results while calculating next bar');
+    assertEquals(plusDm.getResult(),  expectResult, 'Wrong Results while calculating next bar');
   });
 
-  it('should be able to get PlusDM for the next bar using nextValue', function() {
+  Deno.test('should be able to get PlusDM for the next bar using nextValue', function() {
     let plusDm = new PlusDM({period : period, high : [], low:[], close:[]});
     let results = [];
     input.close.forEach(function(close,index) {
@@ -77,7 +79,7 @@ describe('PlusDM', function() {
       if(result!==undefined)
         results.push(result)
     });
-    assert.deepEqual(results, expectResult, 'Wrong Results while getting results');
+    assertEquals(results, expectResult, 'Wrong Results while getting results');
   })
 
 })

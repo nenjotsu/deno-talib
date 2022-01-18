@@ -1,5 +1,7 @@
-let CandlestickFinder = require('../../lib/candlestick/CandlestickFinder').default;
-let assert = require('assert');
+let CandlestickFinder from '../../src/candlestick/CandlestickFinder').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
 
 
 let input = {
@@ -233,33 +235,33 @@ let singleLastData = {
     ]
   }
 
-describe('Common candlestick utilities : ', function() {
-  it('Generate candlestick should generate subset of data based on supplied data', function() {
+Deno.test('Common candlestick utilities : ', function() {
+  Deno.test('Generate candlestick should generate subset of data based on supplied data', function() {
    let results = CandlestickFinder.prototype._generateDataForCandleStick.call({ requiredCount : 3 }, input);
-   assert.deepEqual(results.length, input.close.length - (3 -1), 'Wrong subset length of data while generating data for candlestick');
-   assert.deepEqual(results, expectResult, 'Wrong subset of data while generating data for candlestick');
+   assertEquals(results.length, input.close.length - (3 -1), 'Wrong subset length of data while generating data for candlestick');
+   assertEquals(results, expectResult, 'Wrong subset of data while generating data for candlestick');
   })
   
-  it('Generate candlestick should generate subset of data based on supplied data', function() {
+  Deno.test('Generate candlestick should generate subset of data based on supplied data', function() {
    let results = CandlestickFinder.prototype._getLastDataForCandleStick.call({ requiredCount : 3 }, input);
-   assert.deepEqual(results, expectResult[expectResult.length - 1], 'Wrong Results while getting last data for candlestick');
+   assertEquals(results, expectResult[expectResult.length - 1], 'Wrong Results while getting last data for candlestick');
   })
   
-  it('Generate candlestick should generate subset of data based on supplied data', function() {
+  Deno.test('Generate candlestick should generate subset of data based on supplied data', function() {
    let results = CandlestickFinder.prototype._getLastDataForCandleStick.call({ requiredCount : 3 }, singleLastData);
-   assert.deepEqual(results, expectResult[expectResult.length - 1], 'Wrong Results while getting single last data for candlestick');
+   assertEquals(results, expectResult[expectResult.length - 1], 'Wrong Results while getting single last data for candlestick');
   })
   
-  it('Approximate Equal return true when value is less than 0.1 percent of difference', function() {
+  Deno.test('Approximate Equal return true when value is less than 0.1 percent of difference', function() {
    let results = CandlestickFinder.prototype.approximateEqual.call(null ,1 , 1.001);
-   assert.deepEqual(results, true, 'Approximate equal returns fals when true');
+   assertEquals(results, true, 'Approximate equal returns fals when true');
    let results = CandlestickFinder.prototype.approximateEqual.call(null ,10 , 10.01);
-   assert.deepEqual(results, true, 'Approximate equal returns fals when true');
+   assertEquals(results, true, 'Approximate equal returns fals when true');
    let results = CandlestickFinder.prototype.approximateEqual.call(null ,100 , 100.1);
-   assert.deepEqual(results, true, 'Approximate equal returns fals when true');
+   assertEquals(results, true, 'Approximate equal returns fals when true');
    let results = CandlestickFinder.prototype.approximateEqual.call(null ,1000 , 1001);
-   assert.deepEqual(results, true, 'Approximate equal returns fals when true');
+   assertEquals(results, true, 'Approximate equal returns fals when true');
    let results = CandlestickFinder.prototype.approximateEqual.call(null ,10000 , 10010);
-   assert.deepEqual(results, true, 'Approximate equal returns fals when true');
+   assertEquals(results, true, 'Approximate equal returns fals when true');
   })
 })

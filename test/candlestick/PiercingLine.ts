@@ -1,7 +1,9 @@
-let PiercingLine = require('../../lib/candlestick/PiercingLine').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let PiercingLine from '../../src/candlestick/PiercingLine').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [42.70, 41.33],
@@ -11,15 +13,15 @@ let input = {
   
 }
 
-describe('PiercingLine : ', function() {
+Deno.test('PiercingLine : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/PiercingLine.png',imageBuffer);
   });
-  it('Check whether the supplied data has PiercingLine pattern', function() {
+  Deno.test('Check whether the supplied data has PiercingLine pattern', function() {
    let piercingLine = new PiercingLine ();
    let result = piercingLine.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for PiercingLine')
+   assertEquals(result, true, 'Invalid result for PiercingLine')
    
   });
 })

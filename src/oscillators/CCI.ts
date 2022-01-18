@@ -4,6 +4,7 @@ import { SMA } from "../moving_averages/SMA.ts";
 import LinkedList from "../Utils/FixedSizeLinkedList.ts";
 
 export class CCIInput extends IndicatorInput {
+  open: number[] = [];
   high: number[] = [];
   low: number[] = [];
   close: number[] = [];
@@ -15,6 +16,7 @@ export class CCI extends Indicator {
   generator: IterableIterator<number | undefined>;
   constructor(input: CCIInput) {
     super(input);
+    const open = input.open;
     const lows = input.low;
     const highs = input.high;
     const closes = input.close;

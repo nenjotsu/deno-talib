@@ -1,7 +1,7 @@
-let HangingMan      = require('../../lib/candlestick/HangingMan').default;
-let assert          = require('assert');
-let drawCandleStick = require('draw-candlestick');
-let fs              = require('fs');
+let HangingMan      from '../../src/candlestick/HangingMan').default;
+let assert          from 'assert');
+let drawCandleStick from 'draw-candlestick');
+let fs              from 'fs');
 
 let hangingManData = [
   {
@@ -24,7 +24,7 @@ let hangingManData = [
   },
 ];
 
-describe('Hanging Man : ', function() {
+Deno.test('Hanging Man : ', function() {
    before(function() {
     hangingManData.forEach((patternSet) => {
       let imageBuffer = drawCandleStick(patternSet.data);
@@ -32,10 +32,10 @@ describe('Hanging Man : ', function() {
     });
   });
   hangingManData.forEach((patternSet) => {
-    it(`Check whether the supplied data has Hanging Man: ${patternSet.name}`, function() {
+    Deno.test(`Check whether the supplied data has Hanging Man: ${patternSet.name}`, function() {
       let hangingMan = new HangingMan();
       let result = hangingMan.hasPattern(patternSet.data);
-      assert.deepEqual(result, true, `Invalid result for Hanging Man: ${patternSet.name}`);
+      assertEquals(result, true, `Invalid result for Hanging Man: ${patternSet.name}`);
      });
   });
 })

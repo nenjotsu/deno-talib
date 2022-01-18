@@ -1,7 +1,9 @@
 
 "use strict";
-let assert = require('assert');
-let KeltnerChannels    = require('../../lib/volatility/KeltnerChannels').KeltnerChannels;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let KeltnerChannels    from '../../src/volatility/KeltnerChannels').KeltnerChannels;
 
 let input = {
   useSMA : false,
@@ -749,24 +751,24 @@ let expectResult = [
   }
 ]
 
-describe('KeltnerChannels', function() {
-  it('should calculate KeltnerChannels using the calculate method', function() {
+Deno.test('KeltnerChannels', function() {
+  Deno.test('should calculate KeltnerChannels using the calculate method', function() {
     let out  = KeltnerChannels.calculate(input);
     require('fs').writeFileSync('keltner', JSON.stringify(out, null, 2))
-    assert.deepEqual(out, expectResult, 'Wrong Results');
+    assertEquals(out, expectResult, 'Wrong Results');
   });
 
-  it('should be able to calculate KeltnerChannels by using getResult', function() {
+  Deno.test('should be able to calculate KeltnerChannels by using getResult', function() {
     let keltnerchannels = new KeltnerChannels(input);
-    assert.deepEqual(keltnerchannels.getResult(),  expectResult, 'Wrong Results while calculating next bar');
+    assertEquals(keltnerchannels.getResult(),  expectResult, 'Wrong Results while calculating next bar');
   });
 
-  it('should be able to calculate KeltnerChannels for reversed input by using calculate method', function() {
+  Deno.test('should be able to calculate KeltnerChannels for reversed input by using calculate method', function() {
     let myInput = Object.assign({}, input);
     myInput.reversedInput = true;
     myInput.high.reverse();
     myInput.low.reverse();
     myInput.close.reverse();
-    assert.deepEqual(KeltnerChannels.calculate(myInput),  expectResult.slice().reverse(), 'Wrong Results while calculating next bar');
+    assertEquals(KeltnerChannels.calculate(myInput),  expectResult.slice().reverse(), 'Wrong Results while calculating next bar');
   });
 })

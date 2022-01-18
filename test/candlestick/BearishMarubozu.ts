@@ -1,7 +1,9 @@
-let BearishMarubozu = require('../../lib/candlestick/BearishMarubozu').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let BearishMarubozu from '../../src/candlestick/BearishMarubozu').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   close: [30.50],
@@ -10,14 +12,14 @@ let input = {
   low: [30.50],
 }
 
-describe('BearishMarubozu : ', function() {
+Deno.test('BearishMarubozu : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BearishMarubozu.png',imageBuffer);
   });
-  it('Check whether the supplied data has BearishMarubozu pattern', function() {
+  Deno.test('Check whether the supplied data has BearishMarubozu pattern', function() {
    let bearishMarubozu = new BearishMarubozu();
    let result = bearishMarubozu.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for BearishMarubozu');
+   assertEquals(result, true, 'Invalid result for BearishMarubozu');
   });
 })

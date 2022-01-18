@@ -1,7 +1,9 @@
-let BullishSpinningTop = require('../../lib/candlestick/BullishSpinningTop').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let BullishSpinningTop from '../../src/candlestick/BullishSpinningTop').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [20.50],
@@ -11,15 +13,15 @@ let input = {
   
 }
 
-describe('BullishSpinningTop : ', function() {
+Deno.test('BullishSpinningTop : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/BullishSpinningTop.png',imageBuffer);
   });
-  it('Check whether the supplied data has BullishSpinningTop pattern', function() {
+  Deno.test('Check whether the supplied data has BullishSpinningTop pattern', function() {
    let bullishSpinningTop = new BullishSpinningTop ();
    let result = bullishSpinningTop.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for BullishSpinningTop')
+   assertEquals(result, true, 'Invalid result for BullishSpinningTop')
    
   });
 })

@@ -1,9 +1,11 @@
 /**
  * Created by AAravindan on 5/8/16.
  */
-let MinusDM = require('../../lib/directionalmovement/MinusDM').MDM;
-let assert = require('assert');
-let data   = require('../data')
+let MinusDM from '../../src/directionalmovement/MinusDM').MDM;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data')
 
 let period = 14;
 
@@ -56,17 +58,17 @@ let expectResult =  [
        ]
 
 
-  describe('MinusDM', function() {
-    it('should calculate MinusDM using the calculate method', function() {
-      assert.deepEqual(MinusDM.calculate(input), expectResult, 'Wrong Results');
+  Deno.test('MinusDM', function() {
+    Deno.test('should calculate MinusDM using the calculate method', function() {
+      assertEquals(MinusDM.calculate(input), expectResult, 'Wrong Results');
     });
 
-    it('should be able to calculate MinusDM by using getResult', function() {
+    Deno.test('should be able to calculate MinusDM by using getResult', function() {
       let minusDm = new MinusDM(input);
-      assert.deepEqual(minusDm.getResult(),  expectResult, 'Wrong Results while calculating next bar');
+      assertEquals(minusDm.getResult(),  expectResult, 'Wrong Results while calculating next bar');
     });
 
-    it('should be able to get MinusDM for the next bar using nextValue', function() {
+    Deno.test('should be able to get MinusDM for the next bar using nextValue', function() {
       let minusDm = new MinusDM({period : period, high : [], low:[], close:[]});
       let results = [];
       input.close.forEach(function(close,index) {
@@ -78,7 +80,7 @@ let expectResult =  [
         if(result!==undefined)
           results.push(result)
       });
-      assert.deepEqual(results, expectResult, 'Wrong Results while getting results');
+      assertEquals(results, expectResult, 'Wrong Results while getting results');
     })
 
   })

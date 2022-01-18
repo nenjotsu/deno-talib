@@ -4,9 +4,11 @@
 /**
  * Created by AAravindan on 5/3/16.
  */
-let ADX = require('../../lib/directionalmovement/ADX').ADX;
-let assert = require('assert');
-let data   = require('../data')
+let ADX from '../../src/directionalmovement/ADX').ADX;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let data   from '../data')
 
 let period = 14;
 
@@ -132,17 +134,17 @@ let expectResult =  [
 ]
 
 
-describe('ADX (Average Directional Index)', function() {
-  it('should calculate ADX using the calculate method', function() {
-   assert.deepEqual(ADX.calculate(input), expectResult, 'Wrong Results');
+Deno.test('ADX (Average Directional Index)', function() {
+  Deno.test('should calculate ADX using the calculate method', function() {
+   assertEquals(ADX.calculate(input), expectResult, 'Wrong Results');
   });
 
-  it('should be able to calculate ADX by using getResult', function() {
+  Deno.test('should be able to calculate ADX by using getResult', function() {
    let adx = new ADX(input);
-   assert.deepEqual(adx.getResult(),  expectResult, 'Wrong Results while calculating next bar');
+   assertEquals(adx.getResult(),  expectResult, 'Wrong Results while calculating next bar');
   });
   
-  it('should be able to get ADX for the next bar using nextValue', function() {
+  Deno.test('should be able to get ADX for the next bar using nextValue', function() {
    let adx = new ADX({period : period, high : [], low:[], close:[]});
    let results = [];
    input.close.forEach(function(close,index) {
@@ -154,6 +156,6 @@ describe('ADX (Average Directional Index)', function() {
      if(result)
        results.push(result)
    });
-   assert.deepEqual(results, expectResult, 'Wrong Results while getting results');
+   assertEquals(results, expectResult, 'Wrong Results while getting results');
   })
 })

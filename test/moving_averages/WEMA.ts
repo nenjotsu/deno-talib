@@ -1,9 +1,11 @@
 // /**
 //  * Created by AAravindan on 5/3/16.
 //  */
-// let WEMA = require('../../lib/moving_averages/WEMA').WEMA;
-// let assert = require('assert');
-// let data   = require('../data');
+// let WEMA from '../../src/moving_averages/WEMA').WEMA;
+// import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+// let data   from '../data');
 
 // let prices = [
 // 0.959399999999999,
@@ -36,23 +38,23 @@
 // ];
 // let period = 9;
 
-// describe('WEMA (Weighted Moving Average)', function() {
-//   it('should calculate WEMA using the calculate method', function() {
-//     assert.deepEqual(WEMA.calculate({
+// Deno.test('WEMA (Weighted Moving Average)', function() {
+//   Deno.test('should calculate WEMA using the calculate method', function() {
+//     assertEquals(WEMA.calculate({
 //       period : period,
 //       values : prices
 //     }), expectedResult, 'Wrong Results');
 //   });
 
-//   it('should be able to get WEMA for the next bar', function() {
+//   Deno.test('should be able to get WEMA for the next bar', function() {
 //     let WEMA = new WEMA({
 //       period : period,
 //       values : prices
 //     });
-//     assert.deepEqual(WEMA.getResult(),  expectedResult, 'Wrong Results while getting results');
+//     assertEquals(WEMA.getResult(),  expectedResult, 'Wrong Results while getting results');
 //   })
 
-//   it('should be able to get WEMA for the next bar using nextValue', function() {
+//   Deno.test('should be able to get WEMA for the next bar using nextValue', function() {
 //     let WEMA = new WEMA({
 //       period : period,
 //       values : []
@@ -63,6 +65,6 @@
 //       if(result)
 //         results.push(result)
 //     });
-//     assert.deepEqual(results,  expectedResult, 'Wrong Results while getting results');
+//     assertEquals(results,  expectedResult, 'Wrong Results while getting results');
 //   })
 // })

@@ -1,3 +1,4 @@
+// deno-lint-ignore-file
 // @ts-nocheck
 import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
 import { getConfig } from '../config.ts';

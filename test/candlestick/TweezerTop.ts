@@ -1,7 +1,7 @@
-let TweezerTop      = require('../../lib/candlestick/TweezerTop').default;
-let assert          = require('assert');
-let drawCandleStick = require('draw-candlestick');
-let fs              = require('fs');
+let TweezerTop      from '../../src/candlestick/TweezerTop').default;
+let assert          from 'assert');
+let drawCandleStick from 'draw-candlestick');
+let fs              from 'fs');
 
 let testData = {
   open: [29.50, 33.10, 36.00, 40.90, 42.80],
@@ -10,14 +10,14 @@ let testData = {
   low: [26.90, 27.70, 28.00, 39.10, 37.50],
 };
 
-describe('Tweezer Top : ', function() {
+Deno.test('Tweezer Top : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(testData);
     fs.writeFileSync(`${__dirname}/images/TweezerTop.png`,imageBuffer);
   });
-  it(`Check whether the supplied data has Tweezer Top`, function() {
+  Deno.test(`Check whether the supplied data has Tweezer Top`, function() {
     let tweezerTop = new TweezerTop();
     let result     = tweezerTop.hasPattern(testData);
-    assert.deepEqual(result, true, `Invalid result for Tweezer Top`);
+    assertEquals(result, true, `Invalid result for Tweezer Top`);
   });
 })

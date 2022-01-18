@@ -1,7 +1,9 @@
-let DragonFlyDoji = require('../../lib/candlestick/DragonFlyDoji').default;
-let assert = require('assert');
-let drawCandleStick         = require('draw-candlestick');
-let fs                      = require('fs');
+let DragonFlyDoji from '../../src/candlestick/DragonFlyDoji').default;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
+let drawCandleStick         from 'draw-candlestick');
+let fs                      from 'fs');
 
 let input = {
   open: [30.10],
@@ -19,19 +21,19 @@ let inputDot = {
 
 }
 
-describe('DragonFlyDoji : ', function() {
+Deno.test('DragonFlyDoji : ', function() {
    before(function() {
     let imageBuffer = drawCandleStick(input);
     fs.writeFileSync(__dirname+'/images/dragonFlyDoji.png',imageBuffer);
   });
-  it('Check whether the supplied data has DragonFlyDoji pattern', function() {
+  Deno.test('Check whether the supplied data has DragonFlyDoji pattern', function() {
    let dragonFlyDoji = new DragonFlyDoji();
    let result = dragonFlyDoji.hasPattern(input);
-   assert.deepEqual(result, true, 'Invalid result for DragonFlyDoji');
+   assertEquals(result, true, 'Invalid result for DragonFlyDoji');
   });
-  it('Check whether the supplied data has DragonFlyDoji pattern', function() {
+  Deno.test('Check whether the supplied data has DragonFlyDoji pattern', function() {
    let dragonFlyDoji = new DragonFlyDoji();
    let result = dragonFlyDoji.hasPattern(inputDot);
-   assert.deepEqual(result, false, 'Invalid result for a single point Doji');
+   assertEquals(result, false, 'Invalid result for a single point Doji');
   });
 })

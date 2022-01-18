@@ -1,5 +1,7 @@
-let TypicalPrice = require('../../lib/chart_types/TypicalPrice').TypicalPrice;
-let assert = require('assert');
+let TypicalPrice from '../../src/chart_types/TypicalPrice').TypicalPrice;
+import {
+  assertEquals
+} from "https://deno.land/std@0.121.0/testing/asserts.ts";
 
 let data = {
     high : [1, 4, 1, 2, 1],
@@ -9,16 +11,16 @@ let data = {
 
 let expectedOutput = [(1 + 2 + 3)/ 3, (4 + 5 +6)/ 3, (1 + 2 + 4)/ 3, 2, 1];
 
-describe('TypicalPrice ', function() {
+Deno.test('TypicalPrice ', function() {
     let input = {};
     beforeEach(function(){
       input = JSON.parse(JSON.stringify(data));
     });
-    it('should calculate TypicalPrice using the calculate method', function() {
-      assert.deepEqual(TypicalPrice.calculate(input), expectedOutput,'Wrong Results');
+    Deno.test('should calculate TypicalPrice using the calculate method', function() {
+      assertEquals(TypicalPrice.calculate(input), expectedOutput,'Wrong Results');
     });
   
-    it('should be able to get TypicalPrice for the next bar using nextValue', function() {
+    Deno.test('should be able to get TypicalPrice for the next bar using nextValue', function() {
       input.values = [];
       let typicalPrice = new TypicalPrice(input);
       let result = typicalPrice.nextValue({
@@ -26,6 +28,6 @@ describe('TypicalPrice ', function() {
           low : 4,
           close : 4 
       });
-      assert.deepEqual(result,  4, 'Wrong Results');
+      assertEquals(result,  4, 'Wrong Results');
     });
   });
