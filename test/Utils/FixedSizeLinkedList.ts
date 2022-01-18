@@ -1,108 +1,108 @@
 /**
  * Created by AAravindan on 5/7/16.
  */
-"use strict";
-let FixedSizeLinkedList from "../../src/Utils/FixedSizeLinkedList").default;
+import FixedSizeLinkedList from "../../src/Utils/FixedSizeLinkedList.ts";
 import {
-  assertEquals
+  assertEquals,
+  assert
 } from "https://deno.land/std@0.121.0/testing/asserts.ts";
 
-let linkedList;
+let linkedList: any;
 let size = 10;
 
-Deno.test('Fixed Size Linked List', function() {
-  beforeEach(function() {
+Deno.test("Fixed Size Linked List", function () {
+  Deno.test("Should maintain only the fixed size", function () {
     linkedList = new FixedSizeLinkedList(size, true, true, true);
+    for (let i = 1; i < 20; i++) {
+      linkedList.push(i.toString());
+    }
+    assertEquals(linkedList.length, size);
   });
 
-  Deno.test('Should maintain only the fixed size', function() {
-    for(let i=1; i<20; i++) {
-      linkedList.push(i.toString())
+  Deno.test("Should not popup if there is not enough", function () {
+    linkedList = new FixedSizeLinkedList(size, true, true, true);
+    for (let i = 1; i <= 10; i++) {
+      linkedList.push(i.toString());
     }
-    assert.equal(linkedList.length, size);
+    assertEquals(linkedList.length, size);
+    assertEquals(linkedList.head, "1");
+    assertEquals(linkedList.tail, "10");
+    linkedList.push("11");
+    assertEquals(linkedList.lastShift, "1");
+    assertEquals(linkedList.head, "2");
+    assertEquals(linkedList.tail, "11");
+    linkedList.push("12");
+    assertEquals(linkedList.lastShift, "2");
+    assertEquals(linkedList.head, "3");
+    assertEquals(linkedList.tail, "12");
   });
 
-  Deno.test('Should not popup if there is not enough', function(){
-    for(let i=1; i<=10; i++) {
-      linkedList.push(i.toString())
+  Deno.test("Should popup out the first excess to the lastShift", function () {
+    linkedList = new FixedSizeLinkedList(size, true, true, true);
+    for (let i = 1; i <= 11; i++) {
+      linkedList.push(i.toString());
     }
-    assert.equal(linkedList.length, size);
-    assert.equal(linkedList.head, '1');
-    assert.equal(linkedList.tail, '10');
-    linkedList.push('11');
-    assert.equal(linkedList.lastShift, '1');
-    assert.equal(linkedList.head, '2');
-    assert.equal(linkedList.tail, '11');
-    linkedList.push('12');
-    assert.equal(linkedList.lastShift, '2');
-    assert.equal(linkedList.head, '3');
-    assert.equal(linkedList.tail, '12');
-  })
-
-  Deno.test('Should popup out the first excess to the lastShift', function(){
-    for(let i=1; i<=11; i++) {
-      linkedList.push(i.toString())
-    }
-    assert.equal(linkedList.length, size);
-    assert.equal(linkedList.lastShift, '1');
-    linkedList.push('12');
-    assert.equal(linkedList.lastShift, '2');
-    assert.equal(linkedList.head, '3');
-    assert.equal(linkedList.tail, '12');
-    assert.equal(linkedList.length, size);
+    assertEquals(linkedList.length, size);
+    assertEquals(linkedList.lastShift, "1");
+    linkedList.push("12");
+    assertEquals(linkedList.lastShift, "2");
+    assertEquals(linkedList.head, "3");
+    assertEquals(linkedList.tail, "12");
+    assertEquals(linkedList.length, size);
   });
 
-  Deno.test('Should contain an iterator function', function(){
-    for(let i=1; i<=11; i++) {
-      linkedList.push(i.toString())
+  Deno.test("Should contain an iterator function", function () {
+    linkedList = new FixedSizeLinkedList(size, true, true, true);
+    for (let i = 1; i <= 11; i++) {
+      linkedList.push(i.toString());
     }
-    assert(linkedList.iterator, 'Iterator not found');
+    assert(linkedList.iterator, "Iterator not found");
     let results = [];
-    for(let values of linkedList.iterator()){
+    for (let values of linkedList.iterator()) {
       results.push(values);
     }
-    assertEquals(['2','3','4','5','6','7','8','9','10','11'], results);
-  })
-
-  Deno.test('Should maintain period high before shift', function(){
-    for(let i=1; i<=10; i++) {
-      linkedList.push(i)
-    }
-    assert.equal(linkedList.periodHigh, 10)
+    assertEquals(["2", "3", "4", "5", "6", "7", "8", "9", "10", "11"], results);
   });
 
-  Deno.test('Should maintain period high after shift', function(){
-    for(let i=1; i<=13; i++) {
-      linkedList.push(i)
+  Deno.test("Should maintain period high before shift", function () {
+    for (let i = 1; i <= 10; i++) {
+      linkedList.push(i);
     }
-    assert.equal(linkedList.periodHigh, 13)
-  })
-
-  Deno.test('Should maintain period low before shift', function(){
-    for(let i=1; i<=10; i++) {
-      linkedList.push(i)
-    }
-    assert.equal(linkedList.periodLow, 1)
+    assertEquals(linkedList.periodHigh, 10);
   });
 
-  Deno.test('Should maintain period low after shift', function(){
-    for(let i=1; i<=14; i++) {
-      linkedList.push(i)
+  Deno.test("Should maintain period high after shift", function () {
+    for (let i = 1; i <= 13; i++) {
+      linkedList.push(i);
     }
-    assert.equal(linkedList.periodLow, 5)
-  })
+    assertEquals(linkedList.periodHigh, 13);
+  });
 
-  Deno.test('Should maintain sum if requested', function(){
-    for(let i=1; i<=10; i++) {
-      linkedList.push(i)
+  Deno.test("Should maintain period low before shift", function () {
+    for (let i = 1; i <= 10; i++) {
+      linkedList.push(i);
     }
-    assert.equal(linkedList.periodSum, (10 * 11)/2 )
-  })
-  
-  Deno.test('Should maintain sum if requested', function(){
-    for(let i=1; i<=14; i++) {
-      linkedList.push(i)
+    assertEquals(linkedList.periodLow, 1);
+  });
+
+  Deno.test("Should maintain period low after shift", function () {
+    for (let i = 1; i <= 14; i++) {
+      linkedList.push(i);
     }
-    assert.equal(linkedList.periodSum, 95)
-  })
+    assertEquals(linkedList.periodLow, 5);
+  });
+
+  Deno.test("Should maintain sum if requested", function () {
+    for (let i = 1; i <= 10; i++) {
+      linkedList.push(i);
+    }
+    assertEquals(linkedList.periodSum, (10 * 11) / 2);
+  });
+
+  Deno.test("Should maintain sum if requested", function () {
+    for (let i = 1; i <= 14; i++) {
+      linkedList.push(i);
+    }
+    assertEquals(linkedList.periodSum, 95);
+  });
 });
