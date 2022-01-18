@@ -54,6 +54,7 @@ export class BollingerBands extends Indicator {
                     let upper = format(calcSMA + (calcsd * stdDev));
                     // @ts-ignore
                     let lower = format(calcSMA - (calcsd * stdDev));
+                    // @ts-ignore
                     let pb:number = format((tick - lower) / (upper - lower));
                     result = {
                         middle : middle,

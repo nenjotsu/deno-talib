@@ -57,7 +57,7 @@ export class SMA extends Indicator {
 
   static calculate = sma;
 
-  nextValue(price: number): number | undefined {
+  nextValue(price: number|undefined): number | undefined {
     // @ts-ignore
     let result = this.generator.next(price).value;
     if (result != undefined) return this.format(result);

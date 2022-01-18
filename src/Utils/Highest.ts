@@ -20,12 +20,14 @@ export class Highest extends Indicator {
     this.generator = (function* () {
       let tick:number;
       let high;
+      // @ts-ignore
       tick = yield;
       while (true) {
         periodList.push(tick);
         if (periodList.totalPushed >= period) {
           high = periodList.periodHigh;
         }
+        // @ts-ignore
         tick = yield high;
       }
     })();

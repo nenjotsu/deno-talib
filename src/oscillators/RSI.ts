@@ -19,10 +19,10 @@ export class RSI extends Indicator {
     const values = input.values;
     const GainProvider = new AverageGain({ period: period, values: [] });
     const LossProvider = new AverageLoss({ period: period, values: [] });
-    // let count = 1;
-    // @ts-ignore
+    let count = 1;
     this.generator = (function* (_) {
-      let current: number = yield;
+      // @ts-ignore
+      let current = yield;
       let lastAvgGain, lastAvgLoss, RS, currentRSI;
       while (true) {
         lastAvgGain = GainProvider.nextValue(current);
@@ -38,7 +38,8 @@ export class RSI extends Indicator {
             currentRSI = parseFloat((100 - 100 / (1 + RS)).toFixed(2));
           }
         }
-        // count++;
+        count++;
+        // @ts-ignore
         current = yield currentRSI;
       }
     })(period);

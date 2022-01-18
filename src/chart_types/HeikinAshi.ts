@@ -30,11 +30,11 @@ export class HeikinAshi extends Indicator {
 
     this.generator = (function* () {
       // @ts-ignore
-      let candleData = yield;
+      let candleData:any = yield;
       let calculated = null;
       while (true) {
         if (lastOpen === null) {
-          lastOpen = (candleData.close + candleData.open) / 2;
+          lastOpen = (candleData?.close + candleData?.open) / 2;
           lastHigh = candleData.high;
           lastLow = candleData.low;
           lastClose =
@@ -69,7 +69,7 @@ export class HeikinAshi extends Indicator {
             high: newHigh,
             low: newLow,
             volume: candleData.volume || 0,
-            timestamp: candleData.timestamp || 0
+            timestamp: candleData?.timestamp || 0
           };
           lastClose = newClose;
           lastOpen = newOpen;

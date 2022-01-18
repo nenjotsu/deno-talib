@@ -27,7 +27,7 @@ export class AwesomeOscillator extends Indicator {
 
     this.generator = (function* () {
       let result;
-      let tick;
+      let tick:any;
       let medianPrice;
       let slowSmaValue;
       let fastSmaValue;

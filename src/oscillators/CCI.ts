@@ -42,6 +42,7 @@ export class CCI extends Indicator {
     }
     // @ts-ignore
     this.generator = (function* () {
+      // @ts-ignore
       let tick:_tick = yield;
       while (true) {
         const tp = (tick.high + tick.low + tick.close) / 3;

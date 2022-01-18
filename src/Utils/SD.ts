@@ -65,7 +65,7 @@ export class SD extends Indicator {
 
   static calculate = sd;
 
-  nextValue(price: number): number | undefined {
+  nextValue(price: number|undefined): number | undefined {
     // @ts-ignore
     let nextResult = this.generator.next(price);
     if (nextResult.value != undefined) return this.format(nextResult.value);

@@ -1,42 +1,41 @@
 // @ts-nocheck
-import { Indicator, IndicatorInput } from '../indicator/indicator.ts';
+import { Indicator, IndicatorInput } from "../indicator/indicator.ts";
 export class AvgLossInput extends IndicatorInput {
-  values:number[]
-  period:number
+  values: number[];
+  period: number;
 }
 
 export class AverageLoss extends Indicator {
-  generator:IterableIterator<number | undefined>;
-  constructor(input:AvgLossInput) {
+  generator: IterableIterator<number | undefined>;
+  constructor(input: AvgLossInput) {
     super(input);
     let values = input.values;
     let period = input.period;
     let format = this.format;
 
-    this.generator = (function* (period){
+    this.generator = (function* (period) {
       let currentValue = yield;
       let counter = 1;
       let lossSum = 0;
       let avgLoss;
       let loss;
       let lastValue = currentValue;
-      currentValue = yield
-      while(true){
+      currentValue = yield;
+      while (true) {
         loss = lastValue - currentValue;
         loss = loss > 0 ? loss : 0;
-        if(loss > 0){
+        if (loss > 0) {
           lossSum = lossSum + loss;
         }
-        if(counter < period){
+        if (counter < period) {
           counter++;
-        }
-        else if(avgLoss === undefined){ 
+        } else if (avgLoss === undefined) {
           avgLoss = lossSum / period;
-        }else {
-          avgLoss = ((avgLoss * (period-1)) + loss)/period;
+        } else {
+          avgLoss = (avgLoss * (period - 1) + loss) / period;
         }
         lastValue = currentValue;
-        avgLoss = (avgLoss!==undefined) ? format(avgLoss) : undefined;
+        avgLoss = avgLoss !== undefined ? format(avgLoss) : undefined;
         currentValue = yield avgLoss;
       }
     })(period);
@@ -45,9 +44,9 @@ export class AverageLoss extends Indicator {
 
     this.result = [];
 
-    values.forEach((tick:number) => {
+    values.forEach((tick: number) => {
       let result = this.generator.next(tick);
-      if(result.value !== undefined){
+      if (result.value !== undefined) {
         this.result.push(result.value);
       }
     });
@@ -55,17 +54,17 @@ export class AverageLoss extends Indicator {
 
   static calculate = averageloss;
 
-    nextValue(price:number):number | undefined {
-        return this.generator.next(price).value;
-    };
-} 
+  nextValue(price: number | undefined): number | undefined {
+    return this.generator.next(price).value;
+  }
+}
 
-export function averageloss(input:AvgLossInput):number[] {
-       Indicator.reverseInputs(input);
-        let result = new AverageLoss(input).result;
-        if(input.reversedInput) {
-            result.reverse();
-        }
-        Indicator.reverseInputs(input);
-        return result;
-    };
+export function averageloss(input: AvgLossInput): number[] {
+  Indicator.reverseInputs(input);
+  let result = new AverageLoss(input).result;
+  if (input.reversedInput) {
+    result.reverse();
+  }
+  Indicator.reverseInputs(input);
+  return result;
+}
